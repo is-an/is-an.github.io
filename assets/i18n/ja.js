@@ -2,6 +2,17 @@
 // assets/js/i18n.js 의 ja 번역 (legacy + game + gamePage + shutter 병합)
 window.I18N_DATA = window.I18N_DATA || {};
 window.I18N_DATA.ja = {
+  "header_home": "is-an ホーム",
+  "header_navigation": "メインナビゲーション",
+  "header_search_close": "検索を閉じる",
+  "header_search_hint": "ツール名を入力してください。",
+  "header_search_loading": "ツール一覧を読み込み中です。",
+  "header_search_error": "ツール一覧を読み込めません。検索を閉じて、もう一度開いてください。",
+  "directory_meta_title": "すべてのツール · 計算機・ゲーム・ロト・四柱推命 | is-an",
+  "directory_title": "すべてのツール",
+  "directory_copy": "計算機、変換ツール、ゲーム、ロト、四柱推命をまとめて探せます。",
+  "directory_favorite": "お気に入りに追加",
+  "directory_unfavorite": "お気に入りから削除",
   "nav_home": "ホーム",
   "nav_calculator": "計算機",
   "nav_lotto": "ロト",
@@ -88,8 +99,6 @@ window.I18N_DATA.ja = {
   "home_empty_copy": "別のキーワードで検索するか、すべてのツールをご覧ください。",
   "home_empty_action": "すべてのツールを見る",
   "home_guides_title": "計算ガイド",
-  "header_tagline": "ツール集",
-  "header_menuLabel": "メニューを開く",
   "footer_privacy_note": "すべての計算はブラウザー内で処理され、入力値がサーバーに送信されることはありません。",
   "home_eyebrow": "無料オンラインツール",
   "home_title": "毎日の計算を、ここでまとめて",

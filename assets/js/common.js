@@ -14,6 +14,18 @@ function formatDecimal(num, digits = 2) {
   return Number(num).toFixed(digits);
 }
 
+// 저장소 차단/손상으로 게임 진행이 멈추지 않게 기록만 기본값으로 처리한다.
+function readStoredNumber(key) {
+  try {
+    const number = Number(localStorage.getItem(key));
+    return Number.isFinite(number) && number >= 0 ? number : 0;
+  } catch (e) { return 0; }
+}
+
+function writeStoredNumber(key, number) {
+  try { localStorage.setItem(key, String(number)); } catch (e) {}
+}
+
 /**
  * 텍스트를 클립보드에 복사
  */
@@ -239,6 +251,8 @@ function applyHeaderLinks() {
     const route = link.dataset.route;
     const routeMap = {
       home: `${siteRootPath}/`,
+      tech: `${siteRootPath}/guide/`,
+      etc: `${siteRootPath}/faq/`,
       cal: `${siteRootPath}/cal/`,
       lotto: `${siteRootPath}/lotto/`,
       tools: `${siteRootPath}/tools/`,
@@ -250,13 +264,15 @@ function applyHeaderLinks() {
     const href = routeMap[route] || `${siteRootPath}/`;
     link.href = href;
     link.classList.remove('active');
+    link.removeAttribute('aria-current');
 
-    const targetPath = new URL(href, window.location.href).pathname.replace(/\/+$/, '');
-    if (
-      (route === 'home' && (normalizedCurrent === siteRootPath || normalizedCurrent === siteRootPath + '/')) ||
-      (route !== 'home' && targetPath === normalizedCurrent)
-    ) {
+    const localPath = normalizedCurrent.slice(siteRootPath.length) || '/';
+    const section = /^\/(?:cal|tools|games|lotto|saju|stock)(?:\/|$)/.test(localPath)
+      ? 'tools' : /^\/(?:guide|blog)(?:\/|$)/.test(localPath)
+        ? 'tech' : /^\/(?:faq|privacy)(?:\/|$)/.test(localPath) ? 'etc' : 'home';
+    if (route === section) {
       link.classList.add('active');
+      link.setAttribute('aria-current', 'location');
     }
   });
 }

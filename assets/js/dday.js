@@ -19,7 +19,10 @@
     return d.getFullYear() + '년 ' + (d.getMonth() + 1) + '월 ' + d.getDate() + '일 (' + KO_DAY[d.getDay()] + ')';
   }
   function read(key, fallback) {
-    try { return JSON.parse(localStorage.getItem(key) || fallback); } catch (e) { return JSON.parse(fallback); }
+    try {
+      var saved = JSON.parse(localStorage.getItem(key) || fallback);
+      return Array.isArray(saved) ? saved.filter(function (id) { return typeof id === 'string'; }) : [];
+    } catch (e) { return JSON.parse(fallback); }
   }
 
   var el = {

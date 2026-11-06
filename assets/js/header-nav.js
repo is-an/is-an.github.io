@@ -1,5 +1,5 @@
 /* =========================================================
-   header-nav.js — 모바일 메뉴 팝업 + 도구 검색 팝업
+   header-nav.js — 도구 검색 팝업 (탐색 메뉴는 모든 화면에서 표시)
    ---------------------------------------------------------
    ▸ common.js 는 헤더를 fetch 로 주입하므로 주입 시점을 기다립니다.
    ▸ common.js 다음에 로드하세요. 모든 페이지에 넣어도 안전합니다.
@@ -14,6 +14,7 @@
   }
 
   function t(key, fallback) {
+    if (!key) { return fallback; }
     try {
       if (typeof translate === 'function' && typeof getCurrentLanguage === 'function') {
         var v = translate(key, getCurrentLanguage());
@@ -24,7 +25,7 @@
   }
 
   /* ---------- 도구 검색 팝업 ---------- */
-  var overlay, input, resultsEl, tools = null, activeIdx = -1;
+  var overlay, input, resultsEl, tools = null, toolsPromise, activeIdx = -1, savedOverflow;
 
   function loadTools(cb) {
     if (window.SITE_TOOLS && window.SITE_TOOLS.TOOLS) {
@@ -32,21 +33,29 @@
       cb();
       return;
     }
-    var s = document.createElement('script');
-    s.src = basePath() + '/assets/js/tools-data.js';
-    s.onload = function () {
-      tools = (window.SITE_TOOLS && window.SITE_TOOLS.TOOLS) || [];
-      cb();
-    };
-    s.onerror = function () { tools = []; cb(); };
-    document.head.appendChild(s);
+    if (!toolsPromise) {
+      toolsPromise = new Promise(function (resolve, reject) {
+        var s = document.createElement('script');
+        s.src = basePath() + '/assets/js/tools-data.js';
+        s.onload = function () {
+          if (window.SITE_TOOLS && Array.isArray(window.SITE_TOOLS.TOOLS)) { resolve(window.SITE_TOOLS.TOOLS); }
+          else { reject(new Error('Invalid tools-data')); }
+        };
+        s.onerror = function () { s.remove(); reject(new Error('tools-data load failed')); };
+        document.head.appendChild(s);
+      });
+    }
+    toolsPromise.then(function (loaded) { tools = loaded; cb(); }).catch(function () {
+      toolsPromise = null;
+      resultsEl.textContent = t('header_search_error', '도구 목록을 불러오지 못했습니다. 검색을 닫고 다시 열어 주세요.');
+    });
   }
 
   function catName(cat) {
     var cats = window.SITE_TOOLS && window.SITE_TOOLS.CATEGORIES;
     if (!cats) { return ''; }
     for (var i = 0; i < cats.length; i++) {
-      if (cats[i].id === cat) { return cats[i].name; }
+      if (cats[i].id === cat) { return t(cats[i].key, cats[i].name); }
     }
     return '';
   }
@@ -56,10 +65,12 @@
     overlay.className = 'v2-search-overlay';
     overlay.hidden = true;
     overlay.innerHTML =
-      '<div class="v2-search-modal" role="dialog" aria-modal="true" aria-label="도구 검색">' +
+      '<div class="v2-search-modal" role="dialog" aria-modal="true" data-i18n-aria-label="home_searchLabel" aria-label="도구 검색">' +
+      '<div class="v2-search-modal-head">' +
       '<input type="text" class="v2-search-modal-input" id="siteSearchInput" autocomplete="off" ' +
-      'spellcheck="false" data-i18n-placeholder="home_searchLabel" placeholder="도구 검색">' +
-      '<div class="v2-search-modal-results" id="siteSearchResults"></div>' +
+      'spellcheck="false" data-i18n-aria-label="home_searchLabel" aria-label="도구 검색" data-i18n-placeholder="home_searchLabel" placeholder="도구 검색">' +
+      '<button type="button" class="v2-search-close" data-i18n-aria-label="header_search_close" aria-label="검색 닫기">&times;</button></div>' +
+      '<div class="v2-search-modal-results" id="siteSearchResults" aria-live="polite"></div>' +
       '</div>';
     document.body.appendChild(overlay);
     input = overlay.querySelector('#siteSearchInput');
@@ -71,17 +82,35 @@
     });
     input.addEventListener('input', renderResults);
     input.addEventListener('keydown', onKey);
+    overlay.querySelector('.v2-search-close').addEventListener('click', closeSearch);
+    overlay.addEventListener('keydown', function (e) {
+      // 검색 중 입력이 페이지의 게임 단축키로 전달되지 않도록 한다.
+      e.stopPropagation();
+      if (e.key === 'Escape') { e.preventDefault(); closeSearch(); return; }
+      if (e.key !== 'Tab') { return; }
+      var focusable = overlay.querySelectorAll('input, button, a[href]');
+      var first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    });
   }
 
   function openSearch(trigger) {
     if (!overlay) { buildOverlay(); }
     // 헤더 팝업은 한 번에 하나만: 다른 팝업(메뉴/언어)을 닫는다.
     document.dispatchEvent(new CustomEvent('v2:popup', { detail: 'search' }));
+    if (overlay.hidden) { savedOverflow = document.body.style.overflow; }
     overlay.hidden = false;
     document.body.style.overflow = 'hidden';
     overlay._trigger = trigger || null;
+    if (trigger) { trigger.setAttribute('aria-expanded', 'true'); }
+    if (typeof applyLanguage === 'function') { applyLanguage(getCurrentLanguage()); }
+    resultsEl.textContent = t('header_search_loading', '도구 목록을 불러오는 중입니다.');
     loadTools(renderResults);
-    setTimeout(function () { input.focus(); }, 0);
+    input.focus();
   }
 
   document.addEventListener('v2:popup', function (e) {
@@ -91,9 +120,12 @@
   function closeSearch() {
     if (!overlay || overlay.hidden) { return; }
     overlay.hidden = true;
-    document.body.style.overflow = '';
+    document.body.style.overflow = savedOverflow;
     activeIdx = -1;
-    if (overlay._trigger) { try { overlay._trigger.focus(); } catch (e) {} }
+    if (overlay._trigger) {
+      overlay._trigger.setAttribute('aria-expanded', 'false');
+      overlay._trigger.focus();
+    }
   }
 
   function renderResults() {
@@ -104,7 +136,7 @@
     if (tools && tools.length) {
       list = tools.filter(function (item) {
         if (!words.length) { return true; }
-        var hay = (item.name + ' ' + (item.desc || '') + ' ' + (item.short || '') + ' ' + (item.keywords || '')).toLowerCase();
+        var hay = (item.name + ' ' + t(item.key, item.name) + ' ' + t(item.descKey, item.desc || '') + ' ' + (item.short || '') + ' ' + (item.keywords || '')).toLowerCase();
         return words.every(function (w) { return hay.indexOf(w) > -1; });
       }).slice(0, 8);
     }
@@ -117,7 +149,7 @@
       empty.className = 'v2-search-modal-empty';
       empty.textContent = q
         ? t('home_empty_title', '검색 결과가 없습니다.')
-        : '도구 이름을 입력하세요.';
+        : t('header_search_hint', '도구 이름을 입력하세요.');
       resultsEl.appendChild(empty);
       return;
     }
@@ -128,7 +160,7 @@
       a.href = basePath() + item.href;
       var name = document.createElement('span');
       name.className = 'v2-search-result-name';
-      name.textContent = item.name;
+      name.textContent = t(item.key, item.name);
       var cat = document.createElement('span');
       cat.className = 'v2-search-result-cat';
       cat.textContent = catName(item.cat);
@@ -155,6 +187,7 @@
       }
       items[activeIdx].scrollIntoView({ block: 'nearest' });
     } else if (e.key === 'Enter') {
+      e.preventDefault();
       var target = activeIdx > -1 ? items[activeIdx] : items[0];
       if (target) { window.location.href = target.href; }
     }
@@ -162,8 +195,6 @@
 
   /* ---------- 헤더 바인딩 ---------- */
   function bind(header) {
-    var toggle = header.querySelector('#navToggle');
-    var nav = header.querySelector('#mainNav');
     var search = header.querySelector('#headerSearch');
 
     if (search && search.dataset.searchBound !== 'true') {
@@ -174,51 +205,6 @@
       });
     }
 
-    if (!toggle || !nav || toggle.dataset.navBound === 'true') { return; }
-    toggle.dataset.navBound = 'true';
-
-    function setOpen(open) {
-      // 헤더 팝업은 한 번에 하나만: 열 때 다른 팝업(언어/검색)을 닫는다.
-      if (open) {
-        document.dispatchEvent(new CustomEvent('v2:popup', { detail: 'menu' }));
-      }
-      nav.classList.toggle('is-open', open);
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
-    }
-
-    document.addEventListener('v2:popup', function (e) {
-      if (e.detail !== 'menu' && nav.classList.contains('is-open')) { setOpen(false); }
-    });
-
-    toggle.addEventListener('click', function () {
-      setOpen(!nav.classList.contains('is-open'));
-    });
-
-    nav.addEventListener('click', function (e) {
-      if (e.target.closest('.nav-link')) { setOpen(false); }
-    });
-
-    // 언어 선택 팝업과 동일하게 바깥을 누르면 닫힌다.
-    document.addEventListener('click', function (e) {
-      if (nav.classList.contains('is-open') &&
-          !nav.contains(e.target) && !toggle.contains(e.target)) {
-        setOpen(false);
-      }
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key !== 'Escape') { return; }
-      if (overlay && !overlay.hidden) { closeSearch(); return; }
-      if (nav.classList.contains('is-open')) {
-        setOpen(false);
-        toggle.focus();
-      }
-    });
-
-    window.addEventListener('resize', function () {
-      if (window.innerWidth > 760) { setOpen(false); }
-    });
   }
 
   function start() {

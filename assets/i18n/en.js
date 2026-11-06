@@ -2,6 +2,17 @@
 // assets/js/i18n.js 의 en 번역 (legacy + game + gamePage + shutter 병합)
 window.I18N_DATA = window.I18N_DATA || {};
 window.I18N_DATA.en = {
+  "header_home": "is-an home",
+  "header_navigation": "Main navigation",
+  "header_search_close": "Close search",
+  "header_search_hint": "Enter a tool name.",
+  "header_search_loading": "Loading tools.",
+  "header_search_error": "Unable to load tools. Close search and open it again.",
+  "directory_meta_title": "All tools · Calculators, games, lotto and saju | is-an",
+  "directory_title": "All tools",
+  "directory_copy": "Find every calculator, converter, game, lotto and saju tool in one place.",
+  "directory_favorite": "Add to favorites",
+  "directory_unfavorite": "Remove from favorites",
   "nav_home": "Home",
   "nav_calculator": "Calculators",
   "nav_lotto": "Lotto",
@@ -88,8 +99,6 @@ window.I18N_DATA.en = {
   "home_empty_copy": "Try a different keyword or browse all tools.",
   "home_empty_action": "Browse all tools",
   "home_guides_title": "Guides",
-  "header_tagline": "Tools",
-  "header_menuLabel": "Open menu",
   "footer_privacy_note": "Every calculation runs in your browser; your input is never sent to a server.",
   "home_eyebrow": "Free online tools",
   "home_title": "Your everyday calculations, in one place",

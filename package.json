@@ -7,7 +7,7 @@
     "start": "python -m http.server 8000",
     "build": "echo 'Building...'",
     "deploy": "git add -A && git commit -m 'Deploy' && git push",
-    "test": "echo 'Testing...'"
+    "test": "python scripts/check-site.py"
   },
   "keywords": [
     "로또번호",

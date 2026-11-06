@@ -1,46 +1,46 @@
 /* =========================================================
-   home.css — 홈(index.html) 전용 스타일 (1a Index 디자인)
+   tool-directory.css — 홈과 tools의 공통 도구 목록 스타일
    ---------------------------------------------------------
-   로드 순서: style.css → v2.css → home.css
-   모든 규칙은 body.home-v2 아래로 한정되어 다른 페이지에 영향이 없습니다.
+   로드 순서: style.css → v2.css → tool-directory.css
+   모든 규칙은 .tool-directory 아래로 한정됩니다.
    디자인 토큰(--v2-*)과 body 바탕은 v2.css 에서 옵니다.
    ========================================================= */
 
 /* ---------- 히어로 ---------- */
-.home-v2 .v2-hero {
+.tool-directory .v2-hero {
   background: var(--v2-surface);
   border-bottom: 1px solid var(--v2-border);
   padding: 44px 0 36px;
 }
-.home-v2 .v2-eyebrow {
+.tool-directory .v2-eyebrow {
   margin: 0 0 10px; font-family: var(--v2-mono); font-size: 11px; font-weight: 500;
   letter-spacing: .14em; color: var(--v2-accent);
 }
-.home-v2 .v2-h1 {
+.tool-directory .v2-h1 {
   margin: 0 0 8px; font-size: clamp(28px, 4vw, 40px); font-weight: 600;
   line-height: 1.2; letter-spacing: -.03em;
 }
-.home-v2 .v2-lede { margin: 0 0 22px; font-size: 15px; color: var(--v2-muted); text-wrap: pretty; }
+.tool-directory .v2-lede { margin: 0 0 22px; font-size: 15px; color: var(--v2-muted); text-wrap: pretty; }
 
-.home-v2 .v2-search { display: flex; gap: 10px; max-width: 620px; }
-.home-v2 .v2-search-input {
+.tool-directory .v2-search { display: flex; gap: 10px; max-width: 620px; }
+.tool-directory .v2-search-input {
   flex: 1; min-width: 0; box-sizing: border-box;
   background: var(--v2-surface); color: var(--v2-text);
   border: 1.5px solid var(--v2-text); border-radius: 10px;
   padding: 13px 16px; font-size: 15px; font-family: inherit; min-height: 50px;
 }
-.home-v2 .v2-search-btn {
+.tool-directory .v2-search-btn {
   padding: 0 22px; min-height: 50px; background: var(--v2-invert); color: var(--v2-invert-text);
   border: 0; border-radius: 10px; font: 500 14px var(--v2-sans); cursor: pointer;
   white-space: nowrap;
 }
 
-.home-v2 .v2-trust { margin: 20px 0 0; font-size: 12.5px; color: var(--v2-faint); }
+.tool-directory .v2-trust { margin: 20px 0 0; font-size: 12.5px; color: var(--v2-faint); }
 
 /* ---------- 본문 2단: 메인 + 사이드바 ---------- */
 /* 상세 페이지(.v2-tool-layout)와 동일한 구조. 최근 사용·즐겨찾기가
    모두 비어 있으면 사이드바를 숨기고 메인이 전체 폭을 쓴다(.has-side). */
-.home-v2 .v2-home-body {
+.tool-directory .v2-home-body {
   max-width: var(--v2-max);
   margin: 0 auto;
   padding: 32px 24px 40px;
@@ -49,28 +49,28 @@
   gap: 24px;
   align-items: start;
 }
-.home-v2 .v2-home-body.has-side { grid-template-columns: minmax(0, 1fr) 300px; }
-.home-v2 .v2-home-body:not(.has-side) .v2-side { display: none; }
+.tool-directory .v2-home-body.has-side { grid-template-columns: minmax(0, 1fr) 300px; }
+.tool-directory .v2-home-body:not(.has-side) .v2-side { display: none; }
 
-.home-v2 .v2-side-head h2 { white-space: nowrap; }
-.home-v2 .v2-side-clear {
+.tool-directory .v2-side-head h2 { white-space: nowrap; }
+.tool-directory .v2-side-clear {
   margin-left: auto;
   flex: none;
   background: none; border: 0; padding: 4px;
   font: 400 11px var(--v2-sans); color: var(--v2-faint); cursor: pointer;
   white-space: nowrap;
 }
-.home-v2 .v2-side-clear:hover { color: var(--v2-text); }
-.home-v2 .v2-side-list > .v2-side-row:last-child,
-.home-v2 .v2-side-list > .v2-fav-row:last-child { border-bottom: 0; }
+.tool-directory .v2-side-clear:hover { color: var(--v2-text); }
+.tool-directory .v2-side-list > .v2-side-row:last-child,
+.tool-directory .v2-side-list > .v2-fav-row:last-child { border-bottom: 0; }
 
 /* 즐겨찾기 행: 링크(좌) + 해제(★) 버튼(우) */
-.home-v2 .v2-fav-row {
+.tool-directory .v2-fav-row {
   display: flex;
   align-items: center;
   border-bottom: 1px solid var(--v2-border-soft);
 }
-.home-v2 .v2-fav-link {
+.tool-directory .v2-fav-link {
   flex: 1;
   min-width: 0;
   display: flex;
@@ -79,8 +79,8 @@
   gap: 12px;
   padding: 13px 6px 13px 18px;
 }
-.home-v2 .v2-fav-link:hover { background: var(--v2-surface-2); }
-.home-v2 .v2-fav-remove {
+.tool-directory .v2-fav-link:hover { background: var(--v2-surface-2); }
+.tool-directory .v2-fav-remove {
   flex: none;
   width: 34px;
   height: 34px;
@@ -92,114 +92,114 @@
   color: var(--v2-accent);
   cursor: pointer;
 }
-.home-v2 .v2-fav-remove:hover { background: var(--v2-border-soft); color: var(--v2-text); }
+.tool-directory .v2-fav-remove:hover { background: var(--v2-border-soft); color: var(--v2-text); }
 
 /* ---------- 섹션 공통 ---------- */
-.home-v2 .v2-section + .v2-section { margin-top: 34px; }
-.home-v2 .v2-section-head {
+.tool-directory .v2-section + .v2-section { margin-top: 34px; }
+.tool-directory .v2-section-head {
   display: flex; align-items: baseline; justify-content: space-between;
   gap: 12px; flex-wrap: wrap; margin-bottom: 14px;
 }
-.home-v2 .v2-h2 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
-.home-v2 .v2-h2-sm { margin: 0; font-size: 15px; font-weight: 600; }
-.home-v2 .v2-note { font-family: var(--v2-mono); font-size: 12px; color: var(--v2-faint); }
-.home-v2 .v2-text-btn {
+.tool-directory .v2-h2 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+.tool-directory .v2-h2-sm { margin: 0; font-size: 15px; font-weight: 600; }
+.tool-directory .v2-note { font-family: var(--v2-mono); font-size: 12px; color: var(--v2-faint); }
+.tool-directory .v2-text-btn {
   background: none; border: 0; font: 400 12px var(--v2-sans);
   color: var(--v2-faint); cursor: pointer; padding: 4px;
 }
-.home-v2 .v2-text-btn:hover { color: var(--v2-text); }
+.tool-directory .v2-text-btn:hover { color: var(--v2-text); }
 
 /* ---------- 전체 도구 인덱스 ---------- */
 /* 멀티컬럼 레이아웃: 가장 긴 모음(계산기)을 기준으로 나머지 모음이
    같은 컬럼 안에서 세로로 흐른다. 로또·사주처럼 짧은 모음이 도구·게임
    모음 아래로 줄바꿈되어 빈 공간 없이 채워진다. */
-.home-v2 .v2-index-grid {
+.tool-directory .v2-index-grid {
   columns: 340px 3;
   column-gap: 12px;
 }
-.home-v2 .v2-group {
+.tool-directory .v2-group {
   break-inside: avoid;
   -webkit-column-break-inside: avoid;
   margin-bottom: 12px;
   background: var(--v2-surface); border: 1px solid var(--v2-border);
   border-radius: var(--v2-radius); overflow: hidden;
 }
-.home-v2 .v2-group-head {
+.tool-directory .v2-group-head {
   display: flex; align-items: center; gap: 8px;
   padding: 14px 18px; border-bottom: 1px solid var(--v2-border-soft);
 }
-.home-v2 .v2-group-head h3 { margin: 0; font-size: 14px; font-weight: 600; }
-.home-v2 .v2-group-head .v2-count { font: 400 11px var(--v2-mono); color: var(--v2-faint); }
-.home-v2 .v2-group-head .v2-spacer { flex: 1; }
-.home-v2 .v2-group-head .v2-all { font-size: 12px; color: var(--v2-muted); }
-.home-v2 .v2-group-dot { width: 7px; height: 7px; border-radius: 50%; }
+.tool-directory .v2-group-head h3 { margin: 0; font-size: 14px; font-weight: 600; }
+.tool-directory .v2-group-head .v2-count { font: 400 11px var(--v2-mono); color: var(--v2-faint); }
+.tool-directory .v2-group-head .v2-spacer { flex: 1; }
+.tool-directory .v2-group-head .v2-all { font-size: 12px; color: var(--v2-muted); }
+.tool-directory .v2-group-dot { width: 7px; height: 7px; border-radius: 50%; }
 
-.home-v2 .v2-row {
+.tool-directory .v2-row {
   display: flex; align-items: center; gap: 10px;
   padding: 0 8px 0 18px; border-bottom: 1px solid var(--v2-border-soft);
 }
-.home-v2 .v2-row:last-child { border-bottom: 0; }
-.home-v2 .v2-row:hover { background: var(--v2-surface-2); }
-.home-v2 .v2-row-link {
+.tool-directory .v2-row:last-child { border-bottom: 0; }
+.tool-directory .v2-row:hover { background: var(--v2-surface-2); }
+.tool-directory .v2-row-link {
   flex: 1; min-width: 0; display: flex; align-items: center; justify-content: space-between;
   gap: 14px; padding: 12px 0; min-height: 24px;
 }
-.home-v2 .v2-row-name { font-size: 13.5px; font-weight: 500; white-space: nowrap; }
-.home-v2 .v2-row-short {
+.tool-directory .v2-row-name { font-size: 13.5px; font-weight: 500; min-width: 0; overflow-wrap: anywhere; }
+.tool-directory .v2-row-short {
   font-size: 12.5px; color: var(--v2-faint); text-align: right;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.home-v2 .v2-star-btn {
+.tool-directory .v2-star-btn {
   width: 36px; height: 36px; flex: none; background: none; border: 0;
   border-radius: 8px; font-size: 14px; color: var(--v2-faint); cursor: pointer;
 }
-.home-v2 .v2-star-btn[aria-pressed="true"] { color: var(--v2-accent); }
-.home-v2 .v2-star-btn:hover { background: var(--v2-border-soft); }
+.tool-directory .v2-star-btn[aria-pressed="true"] { color: var(--v2-accent); }
+.tool-directory .v2-star-btn:hover { background: var(--v2-border-soft); }
 
 /* ---------- 빈 상태 ---------- */
-.home-v2 .v2-empty {
+.tool-directory .v2-empty {
   background: var(--v2-surface); border: 1px solid var(--v2-border);
   border-radius: var(--v2-radius); padding: 40px 24px; text-align: center; margin-bottom: 12px;
 }
-.home-v2 .v2-empty-title { margin: 0 0 6px; font-size: 15px; font-weight: 500; }
-.home-v2 .v2-empty-copy { margin: 0 0 16px; font-size: 13px; color: var(--v2-muted); }
-.home-v2 .v2-primary-btn {
+.tool-directory .v2-empty-title { margin: 0 0 6px; font-size: 15px; font-weight: 500; }
+.tool-directory .v2-empty-copy { margin: 0 0 16px; font-size: 13px; color: var(--v2-muted); }
+.tool-directory .v2-primary-btn {
   padding: 11px 16px; min-height: 44px; background: var(--v2-invert); color: var(--v2-invert-text);
   border: 0; border-radius: 9px; font: 500 13px var(--v2-sans); cursor: pointer;
 }
 
 /* ---------- 소개 / 가이드 ---------- */
-.home-v2 .v2-two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 12px; }
-.home-v2 .v2-panel {
+.tool-directory .v2-two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 12px; }
+.tool-directory .v2-panel {
   background: var(--v2-surface); border: 1px solid var(--v2-border);
   border-radius: var(--v2-radius); padding: 22px 24px;
 }
-.home-v2 .v2-body-copy { margin: 8px 0 0; font-size: 13.5px; line-height: 1.75; color: var(--v2-text-2); text-wrap: pretty; }
-.home-v2 .v2-guide-list { margin-top: 10px; }
-.home-v2 .v2-guide {
+.tool-directory .v2-body-copy { margin: 8px 0 0; font-size: 13.5px; line-height: 1.75; color: var(--v2-text-2); text-wrap: pretty; }
+.tool-directory .v2-guide-list { margin-top: 10px; }
+.tool-directory .v2-guide {
   display: flex; justify-content: space-between; gap: 14px;
   padding: 10px 0; border-bottom: 1px solid var(--v2-border-soft); font-size: 13.5px;
 }
-.home-v2 .v2-guide:last-child { border-bottom: 0; }
-.home-v2 .v2-guide-tool { flex: none; font-size: 12px; color: var(--v2-faint); }
+.tool-directory .v2-guide:last-child { border-bottom: 0; }
+.tool-directory .v2-guide-tool { flex: none; font-size: 12px; color: var(--v2-faint); }
 
 /* ---------- 반응형 ---------- */
 @media (max-width: 980px) {
-  .home-v2 .v2-home-body.has-side { grid-template-columns: minmax(0, 1fr); }
-  .home-v2 .v2-home-body .v2-side { order: -1; }
+  .tool-directory .v2-home-body.has-side { grid-template-columns: minmax(0, 1fr); }
+  .tool-directory .v2-home-body .v2-side { order: -1; }
   /* 사이드바가 본문 위 전체 폭으로 접힐 때 빈 광고 자리는 숨김 */
-  .home-v2 .v2-home-body .v2-side .v2-ad-side { display: none; }
+  .tool-directory .v2-home-body .v2-side .v2-ad-side { display: none; }
 }
 @media (max-width: 600px) {
-  .home-v2 .v2-index-grid { columns: 1; }
+  .tool-directory .v2-index-grid { columns: 1; }
 }
 @media (max-width: 640px) {
-  .home-v2 .v2-container { padding: 0 16px; }
-  .home-v2 .v2-home-body { padding: 24px 16px 32px; }
-  .home-v2 .v2-hero { padding: 26px 0 22px; }
-  .home-v2 .v2-search { flex-direction: column; }
-  .home-v2 .v2-search-btn { width: 100%; }
-  .home-v2 .v2-row-link { padding: 14px 0; }
-  .home-v2 .v2-row-short,
-  .home-v2 .v2-side-short { display: none; }
+  .tool-directory .v2-container { padding: 0 16px; }
+  .tool-directory .v2-home-body { padding: 24px 16px 32px; }
+  .tool-directory .v2-hero { padding: 26px 0 22px; }
+  .tool-directory .v2-search { flex-direction: column; }
+  .tool-directory .v2-search-btn { width: 100%; }
+  .tool-directory .v2-row-link { padding: 14px 0; }
+  .tool-directory .v2-row-short,
+  .tool-directory .v2-side-short { display: none; }
 }

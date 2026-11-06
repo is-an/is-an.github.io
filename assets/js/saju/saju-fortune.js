@@ -120,6 +120,15 @@
       if (!raw) { return null; }
       var data = JSON.parse(raw);
       if (!data || data.version !== CACHE_VERSION) { return null; }
+      if (!Array.isArray(data.fortune) || data.fortune.length !== CATEGORIES.length ||
+          !data.fortune.every(function (item, index) {
+            return item && item.key === CATEGORIES[index].key &&
+              typeof item.label === 'string' && typeof item.message === 'string' &&
+              Number.isFinite(item.score) && item.score >= 0 && item.score <= 100;
+          }) || !data.lucky ||
+          typeof data.lucky.color !== 'string' || typeof data.lucky.time !== 'string' ||
+          typeof data.lucky.keyword !== 'string' || !Number.isInteger(data.lucky.number) ||
+          data.lucky.number < 1 || data.lucky.number > 9) { return null; }
       return data;
     } catch (e) {
       return null;

@@ -2,7 +2,7 @@
    v2.css — 리디자인 공통 스타일 (모든 페이지)
    ---------------------------------------------------------
    로드 순서: style.css → v2.css → (페이지별 CSS)
-     페이지별 CSS: home.css / saju.css / game.css
+     기능별 CSS: tool-directory.css / saju.css / game.css
 
    구성
      1. VARIABLES   : --v2-* 디자인 토큰 (라이트/다크)
@@ -174,12 +174,13 @@ body.v2-page *:focus-visible { outline: 2px solid var(--v2-accent); outline-offs
   gap: 20px;
 }
 
-/* 로고 (좌측 영역 — nav 를 가운데 두기 위해 flex:1) */
+/* 로고와 사이트명은 작은 화면에서도 함께 표시한다. */
 .v2-header .logo.v2-logo {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 12px;
   flex: 1;
+  min-width: 0;
   color: var(--v2-text);
 }
 .v2-header .logo.v2-logo:hover { color: var(--v2-text); }
@@ -189,13 +190,14 @@ body.v2-page *:focus-visible { outline: 2px solid var(--v2-accent); outline-offs
   border-radius: 7px;
   display: block;
 }
-.v2-header .v2-wordmark { font-size: 19px; font-weight: 700; letter-spacing: -.02em; line-height: 1; }
-.v2-header .v2-wordmark-sub {
-  font-family: var(--v2-mono);
-  font-size: 11px;
+.v2-header .v2-wordmark {
+  border-left: 1px solid var(--v2-border);
+  padding-left: 12px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.2;
   white-space: nowrap;
-  line-height: 1;
-  color: var(--v2-muted);
 }
 
 /* 내비게이션 (가운데) */
@@ -203,13 +205,15 @@ body.v2-page *:focus-visible { outline: 2px solid var(--v2-accent); outline-offs
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: 24px;
   flex: none;
 }
 .v2-header .v2-nav .nav-link {
   font-size: 14px;
   color: var(--v2-text-2);
   padding: 19px 0 17px;
+  min-width: 44px;
+  text-align: center;
   border-bottom: 2px solid transparent;
   white-space: nowrap;
 }
@@ -221,22 +225,22 @@ body.v2-page *:focus-visible { outline: 2px solid var(--v2-accent); outline-offs
 }
 .v2-header .nav-separator { display: none; }
 
-/* 우측 액션 (우측 영역 — nav 를 가운데 두기 위해 flex:1) */
+/* 우측 액션 */
 .v2-header .header-actions.v2-header-actions {
-  flex: 1;
+  flex: none;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
 }
 
-/* 도구 검색: 돋보기 아이콘 버튼 — 클릭 시 검색 팝업. 모든 폭에서 36×36 */
+/* 아이콘 버튼은 터치 가능한 40px 영역을 유지한다. */
 .v2-header .v2-header-search {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  min-height: 36px;
+  width: 40px;
+  min-height: 40px;
   flex: none;
   padding: 0;
   box-sizing: border-box;
@@ -265,7 +269,7 @@ body.v2-page *:focus-visible { outline: 2px solid var(--v2-accent); outline-offs
 
 .v2-header .v2-icon-btn,
 .v2-header .lang-toggle.v2-lang-toggle {
-  min-height: 36px;
+  min-height: 40px;
   background: var(--v2-surface);
   border: 1px solid var(--v2-border);
   border-radius: 8px;
@@ -273,9 +277,10 @@ body.v2-page *:focus-visible { outline: 2px solid var(--v2-accent); outline-offs
   cursor: pointer;
   font-family: var(--v2-sans);
 }
-.v2-header .v2-icon-btn { width: 36px; padding: 0; font-size: 14px; }
+.v2-header .v2-icon-btn { width: 40px; padding: 0; font-size: 16px; }
 .v2-header .lang-toggle.v2-lang-toggle {
-  display: flex; align-items: center; gap: 5px;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  min-width: 40px;
   padding: 0 11px; font-size: 12px; white-space: nowrap;
 }
 .v2-header .v2-icon-btn:hover,
@@ -314,72 +319,31 @@ body.v2-page *:focus-visible { outline: 2px solid var(--v2-accent); outline-offs
   font-weight: 600;
 }
 
-/* 모바일 메뉴 버튼 (≤760px 에서 표시, 내비를 팝업으로 연다) */
-.v2-header .v2-nav-toggle {
-  display: none;
-  width: 40px; height: 40px;
-  flex: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  background: var(--v2-surface);
-  border: 1px solid var(--v2-border);
-  border-radius: 9px;
-  cursor: pointer;
-}
-.v2-header .v2-nav-toggle-bar {
-  width: 16px; height: 1.5px;
-  background: var(--v2-text);
-  border-radius: 2px;
-}
-
 /* ---------------- 헤더 반응형 ---------------- */
 @media (max-width: 760px) {
-  .v2-header .v2-header-inner { position: relative; padding: 0 16px; gap: 10px; }
-  .v2-header .logo.v2-logo { flex: 1; }
-  .v2-header .header-actions.v2-header-actions { flex: none; order: 2; }
-  .v2-header .v2-nav-toggle { display: flex; order: 3; }
-
-  /* 내비 = 언어 선택과 동일한 팝업 패널 (돋보기·메뉴 버튼 아래) */
+  .v2-header .v2-header-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 10px 16px 0;
+    gap: 4px 12px;
+  }
+  .v2-header .header-actions.v2-header-actions { grid-column: 2; grid-row: 1; gap: 4px; }
+  /* 세 메뉴를 숨기지 않고 둘째 줄에 배치한다. */
   .v2-header .main-nav.v2-nav {
-    position: absolute;
-    top: calc(100% + 6px);
-    right: 12px;
-    z-index: 50;
-    display: none;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    gap: 2px;
-    width: max-content;      /* style.css 의 @640 .main-nav{width:100%} 무효화 */
-    min-width: 176px;
-    max-width: calc(100vw - 24px);
-    padding: 6px;
-    background: var(--v2-surface);
-    border: 1px solid var(--v2-border);
-    border-radius: 12px;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, .14);
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+    gap: 24px;
+    width: 100%;
+    margin: 0;
   }
-  .v2-header .main-nav.v2-nav.is-open { display: flex; }
-  .v2-header .v2-nav .nav-link {
-    padding: 11px 12px;
-    border: 0;
-    border-radius: 8px;
-    font-size: 14px;
-  }
-  .v2-header .v2-nav .nav-link:hover { background: var(--v2-surface-2); color: var(--v2-text); }
-  .v2-header .v2-nav .nav-link.active {
-    background: var(--v2-accent-bg);
-    color: var(--v2-accent);
-    font-weight: 600;
-  }
+  .v2-header .v2-nav .nav-link { padding: 12px 0 10px; }
 }
 
-/* 아주 좁은 화면: 로고 텍스트를 빼서 아이콘·버튼이 한 줄에 들어오게 */
-@media (max-width: 400px) {
-  .v2-header .v2-header-inner { gap: 8px; padding: 0 12px; }
-  .v2-header .v2-wordmark { display: none; }
+@media (max-width: 480px) {
+  .v2-header .v2-header-inner { padding-inline: 12px; }
+  .v2-header .lang-current { display: none; }
+  .v2-header .lang-toggle.v2-lang-toggle { padding: 0; }
 }
 
 /* ---------------- 푸터 ---------------- */
@@ -487,13 +451,20 @@ body.v2-page *:focus-visible { outline: 2px solid var(--v2-accent); outline-offs
   box-sizing: border-box;
   width: 100%;
   border: 0;
-  border-bottom: 1px solid var(--v2-border-soft);
   background: var(--v2-surface);
   color: var(--v2-text);
   font: 400 16px var(--v2-sans);
   padding: 17px 20px;
   outline: none;
 }
+.v2-search-modal-head { display: flex; align-items: center; border-bottom: 1px solid var(--v2-border); }
+.v2-search-modal-head .v2-search-modal-input { flex: 1; min-width: 0; }
+.v2-search-close {
+  flex: none; width: 44px; height: 44px; margin-right: 6px;
+  border: 0; border-radius: 8px; background: transparent;
+  color: var(--v2-text); font-size: 24px; cursor: pointer;
+}
+.v2-search-close:hover { background: var(--v2-surface-2); }
 .v2-search-modal-input::placeholder { color: var(--v2-faint); }
 .v2-search-modal-results { overflow-y: auto; padding: 6px; }
 .v2-search-modal-empty {
@@ -513,7 +484,7 @@ body.v2-page *:focus-visible { outline: 2px solid var(--v2-accent); outline-offs
 }
 .v2-search-result:hover,
 .v2-search-result.is-active { background: var(--v2-surface-2); }
-.v2-search-result-name { font-size: 14px; font-weight: 500; }
+.v2-search-result-name { font-size: 14px; font-weight: 500; min-width: 0; overflow-wrap: anywhere; }
 .v2-search-result-cat { font-size: 12px; color: var(--v2-faint); white-space: nowrap; }
 
 @media (max-width: 600px) {

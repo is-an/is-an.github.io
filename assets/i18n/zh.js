@@ -2,6 +2,17 @@
 // assets/js/i18n.js 의 zh 번역 (legacy + game + gamePage + shutter 병합)
 window.I18N_DATA = window.I18N_DATA || {};
 window.I18N_DATA.zh = {
+  "header_home": "is-an 首页",
+  "header_navigation": "主导航",
+  "header_search_close": "关闭搜索",
+  "header_search_hint": "请输入工具名称。",
+  "header_search_loading": "正在加载工具列表。",
+  "header_search_error": "无法加载工具列表。请关闭搜索后重试。",
+  "directory_meta_title": "全部工具 · 计算器、游戏、彩票与四柱 | is-an",
+  "directory_title": "全部工具",
+  "directory_copy": "在这里查找所有计算器、转换器、游戏、彩票和四柱工具。",
+  "directory_favorite": "添加收藏",
+  "directory_unfavorite": "取消收藏",
   "nav_home": "首页",
   "nav_calculator": "计算器",
   "nav_lotto": "乐透",
@@ -88,8 +99,6 @@ window.I18N_DATA.zh = {
   "home_empty_copy": "请更换关键词，或浏览全部工具。",
   "home_empty_action": "浏览全部工具",
   "home_guides_title": "计算指南",
-  "header_tagline": "工具集",
-  "header_menuLabel": "打开菜单",
   "footer_privacy_note": "所有计算均在浏览器中完成，输入内容不会发送到服务器。",
   "home_eyebrow": "免费在线工具",
   "home_title": "日常计算，一站搞定",

@@ -148,25 +148,31 @@
     return 'v2-fortune-high';
   }
 
+  // 캐시에서 읽은 문구도 HTML이 아닌 텍스트로 표시한다.
+  function escapeFortuneText(text) {
+    var entities = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+    return String(text).replace(/[&<>"']/g, function (character) { return entities[character]; });
+  }
+
   function renderFortune(fortuneData) {
     el.fortuneDate.textContent = fortuneData.date + ' 기준';
     el.fortuneList.innerHTML = fortuneData.fortune.map(function (f) {
       return '<div class="v2-fortune-row">' +
         '<div class="v2-fortune-row-head">' +
-          '<span class="v2-fortune-label">' + f.label + '</span>' +
+          '<span class="v2-fortune-label">' + escapeFortuneText(f.label) + '</span>' +
           '<span class="v2-fortune-score">' + f.score + '점</span>' +
         '</div>' +
         '<div class="v2-fortune-track"><span class="v2-fortune-bar ' + scoreLevelClass(f.score) + '" style="width:' + f.score + '%"></span></div>' +
-        '<p class="v2-fortune-message">' + f.message + '</p>' +
+        '<p class="v2-fortune-message">' + escapeFortuneText(f.message) + '</p>' +
       '</div>';
     }).join('');
 
     var lucky = fortuneData.lucky;
     el.luckyInfo.innerHTML =
-      '<div class="v2-lucky-item"><span class="v2-lucky-label">행운의 색</span><span class="v2-lucky-value">' + lucky.color + '</span></div>' +
-      '<div class="v2-lucky-item"><span class="v2-lucky-label">행운의 숫자</span><span class="v2-lucky-value">' + lucky.number + '</span></div>' +
-      '<div class="v2-lucky-item"><span class="v2-lucky-label">행운의 시간</span><span class="v2-lucky-value">' + lucky.time + '</span></div>' +
-      '<div class="v2-lucky-item"><span class="v2-lucky-label">오늘의 키워드</span><span class="v2-lucky-value">' + lucky.keyword + '</span></div>';
+      '<div class="v2-lucky-item"><span class="v2-lucky-label">행운의 색</span><span class="v2-lucky-value">' + escapeFortuneText(lucky.color) + '</span></div>' +
+      '<div class="v2-lucky-item"><span class="v2-lucky-label">행운의 숫자</span><span class="v2-lucky-value">' + escapeFortuneText(lucky.number) + '</span></div>' +
+      '<div class="v2-lucky-item"><span class="v2-lucky-label">행운의 시간</span><span class="v2-lucky-value">' + escapeFortuneText(lucky.time) + '</span></div>' +
+      '<div class="v2-lucky-item"><span class="v2-lucky-label">오늘의 키워드</span><span class="v2-lucky-value">' + escapeFortuneText(lucky.keyword) + '</span></div>';
   }
 
   function calculate() {

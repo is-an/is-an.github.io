@@ -7,6 +7,7 @@ const SUPPORTED_LANGUAGES = ['ko', 'en', 'zh', 'ja'];
 const DEFAULT_LANGUAGE = 'ko';
 const LANGUAGE_STORAGE_KEY = 'language';
 const LANGUAGE_NAMES = { ko: '한국어', en: 'English', zh: '中文', ja: '日本語' };
+let selectedLanguage = null;
 
 // ============ 언어 데이터 지연 로딩 ============
 // 기본 언어(ko)는 이 파일에 인라인으로 포함되어 첫 화면에서 즉시 적용된다.
@@ -58,6 +59,17 @@ function ensureLanguage(lang) {
 
 const legacyTranslations = {
   ko: {
+    header_home: 'is-an 홈',
+    header_navigation: '주요 메뉴',
+    header_search_close: '검색 닫기',
+    header_search_hint: '도구 이름을 입력하세요.',
+    header_search_loading: '도구 목록을 불러오는 중입니다.',
+    header_search_error: '도구 목록을 불러오지 못했습니다. 검색을 닫고 다시 열어 주세요.',
+    directory_meta_title: '모든 도구 · 계산기·게임·로또·사주 | is-an',
+    directory_title: '모든 도구',
+    directory_copy: '계산기, 변환기, 게임, 로또와 사주를 한곳에서 찾아보세요. 기존 기능을 모두 모았습니다.',
+    directory_favorite: '즐겨찾기 추가',
+    directory_unfavorite: '즐겨찾기 해제',
     nav_home: "홈",
     nav_calculator: "계산기",
     nav_lotto: "로또",
@@ -1092,6 +1104,7 @@ function detectBrowserLanguage() {
 }
 
 function getCurrentLanguage() {
+  if (selectedLanguage) { return selectedLanguage; }
   const stored = getStoredLanguage();
   if (stored && SUPPORTED_LANGUAGES.indexOf(stored) !== -1) {
     return stored;
@@ -1178,6 +1191,7 @@ function applyLanguage(lang) {
 
 function setLanguage(lang) {
   const activeLang = SUPPORTED_LANGUAGES.indexOf(lang) !== -1 ? lang : DEFAULT_LANGUAGE;
+  selectedLanguage = activeLang;
   // 데이터가 준비된 뒤 한 번만 적용 → 언어 전환 시 중간 깜빡임 없음.
   ensureLanguage(activeLang).then(() => {
     try {
@@ -1186,12 +1200,16 @@ function setLanguage(lang) {
       // localStorage 사용 불가 환경에서도 언어 전환은 동작하도록 유지
     }
     applyLanguage(activeLang);
+    document.dispatchEvent(new CustomEvent('v2:language', { detail: activeLang }));
   });
 }
 
 function initI18n() {
   const lang = getCurrentLanguage();
-  ensureLanguage(lang).then(() => applyLanguage(lang));
+  ensureLanguage(lang).then(() => {
+    applyLanguage(lang);
+    document.dispatchEvent(new CustomEvent('v2:language', { detail: lang }));
+  });
 }
 
 function attachLanguageSwitcher() {
@@ -1231,12 +1249,14 @@ function attachLanguageSwitcher() {
     item.addEventListener('click', () => {
       setLanguage(item.getAttribute('data-lang'));
       closeDropdown();
+      toggle.focus();
     });
     item.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         setLanguage(item.getAttribute('data-lang'));
         closeDropdown();
+        toggle.focus();
       }
     });
   });
@@ -1248,8 +1268,9 @@ function attachLanguageSwitcher() {
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+    if (e.key === 'Escape' && dropdown.classList.contains('open')) {
       closeDropdown();
+      toggle.focus();
     }
   });
 }

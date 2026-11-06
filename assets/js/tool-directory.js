@@ -1,5 +1,5 @@
 /* =========================================================
-   home.js — 홈(index.html) 렌더링 / 검색 / 즐겨찾기 / 최근 사용
+   tool-directory.js — 홈과 tools의 도구 목록 / 검색 / 즐겨찾기 / 최근 사용
    ---------------------------------------------------------
    ▸ 데이터는 assets/js/tools-data.js 한 곳에서만 옵니다.
    ▸ 전역 스크립트 (ES 모듈 아님). common.js 다음에 로드합니다.
@@ -15,20 +15,15 @@
   var RECENT_KEY = 'isan:recent';
   var RECENT_MAX = 5;
 
-  var base = (function () {
-    // common.js 와 동일하게 스크립트 경로에서 사이트 루트를 유추
-    var s = Array.prototype.slice.call(document.scripts).filter(function (x) {
-      return x.src && /assets\/js\/home\.js(?:\?.*)?$/.test(x.src);
-    })[0];
-    if (!s) { return ''; }
-    var p = new URL(s.src, window.location.href).pathname.replace(/\/assets\/js\/home\.js.*$/, '');
-    return p === '/' ? '' : p;
-  })();
+  var base = getSiteBasePath();
 
   function url(href) { return base + href; }
 
   function read(key, fallback) {
-    try { return JSON.parse(localStorage.getItem(key) || fallback); } catch (e) { return JSON.parse(fallback); }
+    try {
+      var saved = JSON.parse(localStorage.getItem(key) || fallback);
+      return Array.isArray(saved) ? saved.filter(function (id) { return typeof id === 'string'; }) : [];
+    } catch (e) { return JSON.parse(fallback); }
   }
   function write(key, value) {
     try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
@@ -62,8 +57,14 @@
 
   function matches(tool, q) {
     if (!q) { return true; }
-    var hay = (tool.name + ' ' + tool.desc + ' ' + (tool.short || '') + ' ' + (tool.keywords || '')).toLowerCase();
+    var hay = (tool.name + ' ' + translated(tool.key, tool.name) + ' ' + translated(tool.descKey, tool.desc) + ' ' + (tool.short || '') + ' ' + (tool.keywords || '')).toLowerCase();
     return q.toLowerCase().split(/\s+/).filter(Boolean).every(function (w) { return hay.indexOf(w) > -1; });
+  }
+
+  function translated(key, fallback) {
+    if (!key || typeof translate !== 'function') { return fallback; }
+    var result = translate(key, getCurrentLanguage());
+    return result && result !== key ? result : fallback;
   }
 
   function node(tag, className, text) {
@@ -129,14 +130,14 @@
         link.href = url(t.href);
         link.addEventListener('click', function () { trackOpen(t.id); });
         link.appendChild(label('span', 'v2-row-name', t, 'name'));
-        link.appendChild(node('span', 'v2-row-short', t.short || ''));
+        link.appendChild(label('span', 'v2-row-short', t, 'desc'));
         row.appendChild(link);
 
         var isFav = favs.indexOf(t.id) > -1;
         var star = node('button', 'v2-star-btn', isFav ? '★' : '☆');
         star.type = 'button';
         star.setAttribute('aria-pressed', isFav ? 'true' : 'false');
-        star.setAttribute('aria-label', (isFav ? '즐겨찾기 해제: ' : '즐겨찾기 추가: ') + t.name);
+        star.setAttribute('aria-label', translated(isFav ? 'directory_unfavorite' : 'directory_favorite', '즐겨찾기') + ': ' + translated(t.key, t.name));
         star.addEventListener('click', function () { toggleFav(t.id); });
         row.appendChild(star);
 
@@ -150,7 +151,7 @@
       el.indexTitle.textContent = query ? '검색 결과' : '전체 도구';
       el.indexTitle.setAttribute('data-i18n', query ? 'home_search_results' : 'home_index_title');
     }
-    if (el.indexCount) { el.indexCount.textContent = (query ? filtered.length : DATA.TOOLS.length) + '개'; }
+    if (el.indexCount) { el.indexCount.textContent = String(filtered.length); }
     if (el.empty) { el.empty.hidden = !(query && filtered.length === 0); }
   }
 
@@ -174,7 +175,7 @@
 
     var btn = node('button', 'v2-fav-remove', '★');
     btn.type = 'button';
-    btn.setAttribute('aria-label', '즐겨찾기 해제: ' + t.name);
+    btn.setAttribute('aria-label', translated('directory_unfavorite', '즐겨찾기 해제') + ': ' + translated(t.key, t.name));
     btn.addEventListener('click', function () { toggleFav(t.id); });
     row.appendChild(btn);
     return row;
@@ -252,6 +253,8 @@
       render();
     });
   }
+
+  document.addEventListener('v2:language', render);
 
   renderGuides();
   render();

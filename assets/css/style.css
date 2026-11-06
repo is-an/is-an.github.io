@@ -1568,7 +1568,7 @@ textarea {
 }
 
 /* ============ 홈 · /cal/ · /tools/ 안내 링크 ============ */
-/* 홈 메인은 v2.css + home.css 로 이동했습니다. (구 .home-hero/.home-*-grid/.home-about 제거) */
+/* 도구 목록은 v2.css + tool-directory.css에서 관리합니다. */
 
 .tools-calc-note { margin: 0; }
 .tools-calc-note a { color: var(--accent); font-weight: 600; }
