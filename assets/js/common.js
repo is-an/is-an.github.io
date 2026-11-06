@@ -222,7 +222,7 @@ function ensureFavicon() {
   const link = document.createElement('link');
   link.rel = 'icon';
   link.type = 'image/svg+xml';
-  link.href = `${getSiteBasePath()}/isa-logo.svg`;
+  link.href = `${getSiteBasePath()}/isa-logo-v2.svg`;
   document.head.appendChild(link);
 }
 
