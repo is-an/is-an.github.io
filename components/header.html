@@ -2,12 +2,21 @@
   <div class="header-inner v2-header-inner">
 
     <a class="logo v2-logo" href="/" data-i18n-aria-label="header_home" aria-label="is-an 홈">
-      <img src="/logo.png" alt="" class="logo-img v2-logo-img" width="28" height="28">
+      <img src="/isa-logo.svg" alt="" class="logo-img v2-logo-img" width="28" height="28">
       <span class="v2-wordmark">is-an</span>
     </a>
 
     <nav class="main-nav v2-nav" id="mainNav" data-i18n-aria-label="header_navigation" aria-label="주요 메뉴">
-      <a href="/guide/" class="nav-link" data-route="tech">tech</a>
+      <div class="v2-nav-group">
+        <a href="/guide/" class="nav-link" data-route="tech">tech</a>
+        <div class="v2-nav-submenu">
+          <a href="/guide/#news" data-tech-category="news" data-i18n="tech_news">기술뉴스</a>
+          <a href="/guide/#sharing" data-tech-category="sharing" data-i18n="tech_sharing">기술공유</a>
+          <a href="/guide/#incidents" data-tech-category="incidents" data-i18n="tech_incidents">장애노트</a>
+          <a href="/guide/#security" data-tech-category="security" data-i18n="tech_security">보안</a>
+          <a href="/guide/#ai" data-tech-category="ai" data-i18n="tech_ai">AI·자동화</a>
+        </div>
+      </div>
       <a href="/tools/" class="nav-link" data-route="tools">tools</a>
       <a href="/faq/" class="nav-link" data-route="etc">etc</a>
     </nav>
@@ -41,6 +50,11 @@
           <li role="option" data-lang="ja" tabindex="0">日本語</li>
         </ul>
       </div>
+      <button type="button" id="navToggle" class="v2-icon-btn v2-nav-toggle"
+              aria-controls="mainNav" aria-expanded="false"
+              data-i18n-aria-label="header_menu_open" aria-label="메뉴 열기">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
     </div>
   </div>
 </header>

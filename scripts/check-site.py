@@ -33,6 +33,8 @@ class Page(HTMLParser):
         for name in ("href", "src", "poster"):
             if attrs.get(name):
                 self.references.append((self.getpos()[0], attrs[name]))
+        if tag == "meta" and attrs.get("property", attrs.get("name")) in ("og:image", "twitter:image") and attrs.get("content"):
+            self.references.append((self.getpos()[0], attrs["content"]))
         if tag == "h1":
             self.h1_count += 1
         if tag == "title":
@@ -84,6 +86,22 @@ def check_site():
     pages = {name: Page(path.read_text(encoding="utf-8-sig")) for name, path in files.items() if name.endswith(".html")}
     errors, references = [], []
     javascript_count = 0
+
+    def manifest_references(entry):
+        if isinstance(entry, dict):
+            for key, value in entry.items():
+                if key in ("src", "url", "start_url") and isinstance(value, str):
+                    references.append(("manifest.json", 0, value))
+                else:
+                    manifest_references(value)
+        elif isinstance(entry, list):
+            for value in entry:
+                manifest_references(value)
+
+    try:
+        manifest_references(json.loads(files["manifest.json"].read_text(encoding="utf-8-sig")))
+    except ValueError as error:
+        errors.append(f"manifest.json: invalid JSON: {error}")
 
     def check_javascript(name, source):
         nonlocal javascript_count

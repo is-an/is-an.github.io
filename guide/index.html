@@ -14,27 +14,63 @@
       } catch (e) {}
     })();
   </script>
-  <title data-i18n="guide.meta.title">연봉·대출·나이 계산 설명서 | is-an</title>
-  <meta name="description" data-i18n-content="guide.meta.description" content="연봉 실수령액, 대출 상환 방식, 만 나이, 적금 이자, 적립식 투자 등 자주 헷갈리는 금융·생활 계산을 예시와 기준으로 정리한 설명서입니다.">
+  <title data-i18n="tech_meta_title">기술뉴스·기술공유·장애노트·보안·AI | is-an</title>
+  <meta name="description" data-i18n-content="tech_copy" content="기술뉴스, 개발 경험, 장애 해결, 보안과 AI 활용을 기록합니다. 다섯 가지 주제별로 글을 찾아보세요.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://is-an.github.io/guide/">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/v2.css">
+  <link rel="stylesheet" href="../assets/css/tech.css">
 </head>
-<body class="v2-page">
+<body class="v2-page tech-page">
   <div id="site-header"></div>
   <main>
     <div class="v2-simple-layout">
       <nav class="v2-crumb" aria-label="현재 위치">
         <a href="../" data-i18n="nav.home">홈</a>
         <span aria-hidden="true">›</span>
-        <span class="v2-crumb-current" data-i18n="guide.title">설명서</span>
+        <span class="v2-crumb-current">tech</span>
       </nav>
 
-      <p class="v2-eyebrow" data-i18n="guide.eyebrow">계산 설명서</p>
-      <h1 class="v2-page-title" data-i18n="guide.title">설명서</h1>
-      <p class="v2-page-lede" data-i18n="guide.copy">매달 마주치는 돈과 생활 속 계산을, 계산기와 함께 예시로 정리합니다.</p>
+      <h1 class="v2-page-title">tech</h1>
+      <p class="v2-page-lede" data-i18n="tech_copy">기술뉴스, 개발 경험, 장애 해결, 보안과 AI 활용을 기록합니다. 다섯 가지 주제별로 글을 찾아보세요.</p>
 
+      <nav class="v2-tech-nav" data-i18n-aria-label="tech_categories" aria-label="tech 하위 카테고리">
+        <a href="#news" data-i18n="tech_news">기술뉴스</a>
+        <a href="#sharing" data-i18n="tech_sharing">기술공유</a>
+        <a href="#incidents" data-i18n="tech_incidents">장애노트</a>
+        <a href="#security" data-i18n="tech_security">보안</a>
+        <a href="#ai" data-i18n="tech_ai">AI·자동화</a>
+      </nav>
+      <div class="v2-tech-categories">
+        <section class="v2-card v2-tech-category" id="news" tabindex="-1" aria-labelledby="newsTitle">
+          <h2 class="v2-card-title" id="newsTitle" data-i18n="tech_news">기술뉴스</h2>
+          <p class="v2-card-copy" data-i18n="tech_news_copy">IT 동향과 신기술, 제품·서비스 업데이트를 살펴봅니다.</p>
+          <p class="v2-tech-empty" data-i18n="tech_empty">아직 등록된 글이 없습니다.</p>
+        </section>
+        <section class="v2-card v2-tech-category" id="sharing" tabindex="-1" aria-labelledby="sharingTitle">
+          <h2 class="v2-card-title" id="sharingTitle" data-i18n="tech_sharing">기술공유</h2>
+          <p class="v2-card-copy" data-i18n="tech_sharing_copy">개발·서버·네트워크 구축과 설정, 실습 경험을 공유합니다.</p>
+          <p class="v2-tech-empty" data-i18n="tech_empty">아직 등록된 글이 없습니다.</p>
+        </section>
+        <section class="v2-card v2-tech-category" id="incidents" tabindex="-1" aria-labelledby="incidentsTitle">
+          <h2 class="v2-card-title" id="incidentsTitle" data-i18n="tech_incidents">장애노트</h2>
+          <p class="v2-card-copy" data-i18n="tech_incidents_copy">장애 증상과 원인, 해결 과정과 재발 방지 방법을 기록합니다.</p>
+          <p class="v2-tech-empty" data-i18n="tech_empty">아직 등록된 글이 없습니다.</p>
+        </section>
+        <section class="v2-card v2-tech-category" id="security" tabindex="-1" aria-labelledby="securityTitle">
+          <h2 class="v2-card-title" id="securityTitle" data-i18n="tech_security">보안</h2>
+          <p class="v2-card-copy" data-i18n="tech_security_copy">보안뉴스와 취약점·패치, 보안 설정과 대응 방법을 다룹니다.</p>
+          <p class="v2-tech-empty" data-i18n="tech_empty">아직 등록된 글이 없습니다.</p>
+        </section>
+        <section class="v2-card v2-tech-category" id="ai" tabindex="-1" aria-labelledby="aiTitle">
+          <h2 class="v2-card-title" id="aiTitle" data-i18n="tech_ai">AI·자동화</h2>
+          <p class="v2-card-copy" data-i18n="tech_ai_copy">AI 활용 사례와 업무 자동화, 스크립트 작성 경험을 모읍니다.</p>
+          <p class="v2-tech-empty" data-i18n="tech_empty">아직 등록된 글이 없습니다.</p>
+        </section>
+      </div>
+
+      <h2 class="v2-card-title v2-tech-guides" data-i18n="tech_guides">기존 도구 활용 가이드</h2>
       <section class="blog-list" aria-label="설명서 글 목록">
         <article class="v2-card blog-card">
           <div class="blog-meta">

@@ -2,6 +2,23 @@
 // assets/js/i18n.js 의 en 번역 (legacy + game + gamePage + shutter 병합)
 window.I18N_DATA = window.I18N_DATA || {};
 window.I18N_DATA.en = {
+  "header_menu_open": "Open menu",
+  "header_menu_close": "Close menu",
+  "tech_meta_title": "Tech news, tutorials, incident notes, security and AI | is-an",
+  "tech_copy": "Explore tech news, engineering experience, incident resolution, security and AI across five topics.",
+  "tech_categories": "Tech categories",
+  "tech_news": "Tech news",
+  "tech_sharing": "Knowledge sharing",
+  "tech_incidents": "Incident notes",
+  "tech_security": "Security",
+  "tech_ai": "AI & automation",
+  "tech_news_copy": "IT trends, new technologies, and product and service updates.",
+  "tech_sharing_copy": "Practical experience with development, servers, networks and configuration.",
+  "tech_incidents_copy": "Incident symptoms, root causes, resolution steps and prevention.",
+  "tech_security_copy": "Security news, vulnerabilities, patches, configuration and response.",
+  "tech_ai_copy": "AI use cases, workflow automation and scripting experience.",
+  "tech_empty": "No articles have been published yet.",
+  "tech_guides": "Existing tool guides",
   "header_home": "is-an home",
   "header_navigation": "Main navigation",
   "header_search_close": "Close search",

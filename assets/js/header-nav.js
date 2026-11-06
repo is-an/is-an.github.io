@@ -1,5 +1,5 @@
 /* =========================================================
-   header-nav.js — 도구 검색 팝업 (탐색 메뉴는 모든 화면에서 표시)
+   header-nav.js — 반응형 탐색 메뉴 + 도구 검색 팝업
    ---------------------------------------------------------
    ▸ common.js 는 헤더를 fetch 로 주입하므로 주입 시점을 기다립니다.
    ▸ common.js 다음에 로드하세요. 모든 페이지에 넣어도 안전합니다.
@@ -205,6 +205,56 @@
       });
     }
 
+    var toggle = header.querySelector('#navToggle');
+    var nav = header.querySelector('#mainNav');
+    if (!toggle || !nav || toggle.dataset.navBound === 'true') { return; }
+    toggle.dataset.navBound = 'true';
+    var mobile = window.matchMedia('(max-width: 760px)');
+
+    function setMenuOpen(open, restoreFocus) {
+      if (open) { document.dispatchEvent(new CustomEvent('v2:popup', { detail: 'menu' })); }
+      nav.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      var key = open ? 'header_menu_close' : 'header_menu_open';
+      toggle.setAttribute('data-i18n-aria-label', key);
+      toggle.setAttribute('aria-label', t(key, open ? '메뉴 닫기' : '메뉴 열기'));
+      if (restoreFocus) { toggle.focus(); }
+    }
+
+    toggle.addEventListener('click', function () {
+      if (!mobile.matches) { return; }
+      var open = !nav.classList.contains('is-open');
+      setMenuOpen(open, !open);
+      if (open) { nav.querySelector('a').focus(); }
+    });
+    nav.addEventListener('click', function (e) {
+      if (mobile.matches && e.target.closest('a')) { setMenuOpen(false, true); }
+    });
+    nav.addEventListener('keydown', function (e) {
+      e.stopPropagation();
+      if (e.key === 'Escape' && mobile.matches) {
+        e.preventDefault(); setMenuOpen(false, true);
+      }
+    });
+    document.addEventListener('v2:popup', function (e) {
+      if (e.detail !== 'menu') { setMenuOpen(false, false); }
+    });
+    document.addEventListener('click', function (e) {
+      if (nav.classList.contains('is-open') && !nav.contains(e.target) && !toggle.contains(e.target)) {
+        setMenuOpen(false, false);
+      }
+    });
+    document.addEventListener('focusin', function (e) {
+      if (nav.classList.contains('is-open') && !nav.contains(e.target) && !toggle.contains(e.target)) {
+        setMenuOpen(false, false);
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) { setMenuOpen(false, true); }
+    });
+    mobile.addEventListener('change', function () {
+      setMenuOpen(false, mobile.matches && nav.contains(document.activeElement));
+    });
   }
 
   function start() {

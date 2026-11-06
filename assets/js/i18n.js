@@ -59,6 +59,23 @@ function ensureLanguage(lang) {
 
 const legacyTranslations = {
   ko: {
+    header_menu_open: '메뉴 열기',
+    header_menu_close: '메뉴 닫기',
+    tech_meta_title: '기술뉴스·기술공유·장애노트·보안·AI | is-an',
+    tech_copy: '기술뉴스, 개발 경험, 장애 해결, 보안과 AI 활용을 기록합니다. 다섯 가지 주제별로 글을 찾아보세요.',
+    tech_categories: 'tech 하위 카테고리',
+    tech_news: '기술뉴스',
+    tech_sharing: '기술공유',
+    tech_incidents: '장애노트',
+    tech_security: '보안',
+    tech_ai: 'AI·자동화',
+    tech_news_copy: 'IT 동향과 신기술, 제품·서비스 업데이트를 살펴봅니다.',
+    tech_sharing_copy: '개발·서버·네트워크 구축과 설정, 실습 경험을 공유합니다.',
+    tech_incidents_copy: '장애 증상과 원인, 해결 과정과 재발 방지 방법을 기록합니다.',
+    tech_security_copy: '보안뉴스와 취약점·패치, 보안 설정과 대응 방법을 다룹니다.',
+    tech_ai_copy: 'AI 활용 사례와 업무 자동화, 스크립트 작성 경험을 모읍니다.',
+    tech_empty: '아직 등록된 글이 없습니다.',
+    tech_guides: '기존 도구 활용 가이드',
     header_home: 'is-an 홈',
     header_navigation: '주요 메뉴',
     header_search_close: '검색 닫기',

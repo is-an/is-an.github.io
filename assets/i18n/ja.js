@@ -2,6 +2,23 @@
 // assets/js/i18n.js 의 ja 번역 (legacy + game + gamePage + shutter 병합)
 window.I18N_DATA = window.I18N_DATA || {};
 window.I18N_DATA.ja = {
+  "header_menu_open": "メニューを開く",
+  "header_menu_close": "メニューを閉じる",
+  "tech_meta_title": "技術ニュース・技術共有・障害ノート・セキュリティ・AI | is-an",
+  "tech_copy": "技術ニュース、開発経験、障害対応、セキュリティ、AI 活用を5つのテーマで紹介します。",
+  "tech_categories": "tech のサブカテゴリー",
+  "tech_news": "技術ニュース",
+  "tech_sharing": "技術共有",
+  "tech_incidents": "障害ノート",
+  "tech_security": "セキュリティ",
+  "tech_ai": "AI・自動化",
+  "tech_news_copy": "IT の動向、新技術、製品やサービスの更新を紹介します。",
+  "tech_sharing_copy": "開発、サーバー、ネットワークの構築・設定・実践経験を共有します。",
+  "tech_incidents_copy": "障害の症状、原因、解決手順、再発防止策を記録します。",
+  "tech_security_copy": "セキュリティニュース、脆弱性とパッチ、設定や対応を扱います。",
+  "tech_ai_copy": "AI の活用事例、業務自動化、スクリプト作成の経験をまとめます。",
+  "tech_empty": "まだ記事がありません。",
+  "tech_guides": "既存のツール活用ガイド",
   "header_home": "is-an ホーム",
   "header_navigation": "メインナビゲーション",
   "header_search_close": "検索を閉じる",

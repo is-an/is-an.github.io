@@ -2,6 +2,23 @@
 // assets/js/i18n.js 의 zh 번역 (legacy + game + gamePage + shutter 병합)
 window.I18N_DATA = window.I18N_DATA || {};
 window.I18N_DATA.zh = {
+  "header_menu_open": "打开菜单",
+  "header_menu_close": "关闭菜单",
+  "tech_meta_title": "技术新闻、技术分享、故障笔记、安全与 AI | is-an",
+  "tech_copy": "按五个主题浏览技术新闻、开发经验、故障处理、信息安全与 AI 应用。",
+  "tech_categories": "tech 子分类",
+  "tech_news": "技术新闻",
+  "tech_sharing": "技术分享",
+  "tech_incidents": "故障笔记",
+  "tech_security": "信息安全",
+  "tech_ai": "AI 与自动化",
+  "tech_news_copy": "关注 IT 趋势、新技术以及产品与服务更新。",
+  "tech_sharing_copy": "分享开发、服务器、网络搭建、配置与实践经验。",
+  "tech_incidents_copy": "记录故障现象、原因、解决过程与预防措施。",
+  "tech_security_copy": "介绍安全新闻、漏洞与补丁、安全配置和应对方法。",
+  "tech_ai_copy": "汇集 AI 应用案例、工作自动化与脚本编写经验。",
+  "tech_empty": "暂无文章。",
+  "tech_guides": "现有工具使用指南",
   "header_home": "is-an 首页",
   "header_navigation": "主导航",
   "header_search_close": "关闭搜索",

@@ -172,6 +172,8 @@ body.v2-page *:focus-visible { outline: 2px solid var(--v2-accent); outline-offs
   display: flex;
   align-items: center;
   gap: 20px;
+  position: relative;
+  flex-wrap: nowrap;
 }
 
 /* 로고와 사이트명은 작은 화면에서도 함께 표시한다. */
@@ -203,12 +205,15 @@ body.v2-page *:focus-visible { outline: 2px solid var(--v2-accent); outline-offs
 /* 내비게이션 (가운데) */
 .v2-header .main-nav.v2-nav {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
   gap: 24px;
   flex: none;
 }
 .v2-header .v2-nav .nav-link {
+  display: block;
+  flex-shrink: 0;
   font-size: 14px;
   color: var(--v2-text-2);
   padding: 19px 0 17px;
@@ -224,6 +229,9 @@ body.v2-page *:focus-visible { outline: 2px solid var(--v2-accent); outline-offs
   border-bottom-color: var(--v2-accent);
 }
 .v2-header .nav-separator { display: none; }
+.v2-header .v2-nav-group { flex: none; }
+.v2-header .v2-nav-submenu,
+.v2-header .v2-nav-toggle { display: none; }
 
 /* 우측 액션 */
 .v2-header .header-actions.v2-header-actions {
@@ -322,22 +330,45 @@ body.v2-page *:focus-visible { outline: 2px solid var(--v2-accent); outline-offs
 /* ---------------- 헤더 반응형 ---------------- */
 @media (max-width: 760px) {
   .v2-header .v2-header-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    padding: 10px 16px 0;
-    gap: 4px 12px;
+    padding: 0 16px;
+    gap: 12px;
   }
-  .v2-header .header-actions.v2-header-actions { grid-column: 2; grid-row: 1; gap: 4px; }
-  /* 세 메뉴를 숨기지 않고 둘째 줄에 배치한다. */
+  .v2-header .header-actions.v2-header-actions { gap: 4px; }
+  .v2-header .v2-nav-toggle { display: inline-flex; align-items: center; justify-content: center; flex: none; }
   .v2-header .main-nav.v2-nav {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    justify-content: flex-start;
-    gap: 24px;
-    width: 100%;
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 12px;
+    z-index: 50;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    width: min(320px, calc(100vw - 24px));
+    max-height: 70vh;
+    max-height: calc(100dvh - 80px);
+    overflow-y: auto;
+    box-sizing: border-box;
     margin: 0;
+    padding: 8px;
+    border: 1px solid var(--v2-border);
+    border-radius: var(--v2-radius);
+    background: var(--v2-surface);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .10);
   }
-  .v2-header .v2-nav .nav-link { padding: 12px 0 10px; }
+  .v2-header .main-nav.v2-nav.is-open { display: flex; }
+  .v2-header .v2-nav .nav-link {
+    display: flex; align-items: center; box-sizing: border-box;
+    min-height: 44px; padding: 10px 12px; border: 0; border-radius: 8px;
+  }
+  .v2-header .v2-nav .nav-link.active { background: var(--v2-accent-bg); color: var(--v2-accent); }
+  .v2-header .v2-nav-submenu { display: flex; flex-direction: column; padding-left: 12px; }
+  .v2-header .v2-nav-submenu a {
+    display: flex; align-items: center; min-height: 44px; padding: 8px 12px;
+    box-sizing: border-box; border-left: 1px solid var(--v2-border);
+    font-size: 13px; color: var(--v2-text-2); overflow-wrap: anywhere;
+  }
+  .v2-header .v2-nav a:hover { background: var(--v2-surface-2); }
 }
 
 @media (max-width: 480px) {

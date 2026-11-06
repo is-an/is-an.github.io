@@ -92,7 +92,10 @@ Adding a top-level section requires updating `routeMap`.
 The primary navigation is `tech` (`/guide/`), `tools` (`/tools/`), and `etc`
 (`/faq/`). All existing calculators, converters, games, lotto, saju, and stock
 tools belong under the tools navigation section, without moving their URLs.
-On narrow screens, the three navigation links remain visible on a second row.
+At 760px and below, primary navigation opens from a hamburger button as a
+nonmodal popup. Desktop navigation stays inline. Tech has five fragment-based
+categories at `/guide/#news`, `#sharing`, `#incidents`, `#security`, and `#ai`.
+Existing guide articles remain at their original URLs below those categories.
 
 Header:
 
@@ -123,6 +126,9 @@ assets/css/v2.css
 
 tool-directory.css
 → shared home/tools directory layout
+
+tech.css
+→ tech category index at /guide/
 
 saju.css
 → saju only
@@ -365,7 +371,7 @@ Managed by:
 
 ```text
 assets/js/header-nav.js
-→ search dialog
+→ mobile navigation popup and search dialog
 
 assets/js/i18n.js
 → language dropdown
@@ -382,6 +388,7 @@ Popup types:
 
 ```text
 lang
+menu
 search
 ```
 
@@ -1083,7 +1090,7 @@ i18n updated for ko/en/zh/ja when required
 Light/dark mode works
 Shared header/footer/ads load
 Sticky header works
-Language/search popups are mutually exclusive
+Language/menu/search popups are mutually exclusive
 No horizontal scroll at 320–1440px
 Mobile/tablet/desktop layout works
 No Console errors

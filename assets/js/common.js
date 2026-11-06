@@ -222,7 +222,7 @@ function ensureFavicon() {
   const link = document.createElement('link');
   link.rel = 'icon';
   link.type = 'image/svg+xml';
-  link.href = `${getSiteBasePath()}/green-circle-logo.svg`;
+  link.href = `${getSiteBasePath()}/isa-logo.svg`;
   document.head.appendChild(link);
 }
 
@@ -241,8 +241,12 @@ function applyHeaderLinks() {
   }
 
   if (logoImage) {
-    logoImage.src = `${siteRootPath}/logo.png`;
+    logoImage.src = `${siteRootPath}/isa-logo.svg`;
   }
+
+  header.querySelectorAll('[data-tech-category]').forEach((link) => {
+    link.href = `${siteRootPath}/guide/#${link.dataset.techCategory}`;
+  });
 
   const currentPath = window.location.pathname.replace(/\/+$/, '');
   const normalizedCurrent = currentPath || '/';

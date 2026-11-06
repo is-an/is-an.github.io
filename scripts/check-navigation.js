@@ -38,7 +38,9 @@ for (const lang of ['ko', 'en', 'zh', 'ja']) {
   context.registerLanguage(lang);
   for (const key of ['header_home', 'header_navigation', 'header_search_close', 'header_search_error',
       'header_search_loading', 'header_search_hint', 'directory_meta_title', 'directory_title', 'directory_copy',
-      'directory_favorite', 'directory_unfavorite', ...data.TOOLS.flatMap(tool => [tool.key, tool.descKey])]) {
+      'directory_favorite', 'directory_unfavorite',
+      ...Object.keys(context.window.I18N_DATA.ko).filter(key => /^(tech_|header_menu_)/.test(key)),
+      ...data.TOOLS.flatMap(tool => [tool.key, tool.descKey])]) {
     assert.ok(key, 'Tool translation key missing');
     const translated = context.translate(key, lang);
     assert.ok(typeof translated === 'string' && translated && translated !== key, lang + ': missing ' + key);
@@ -49,7 +51,11 @@ for (const tool of data.TOOLS) assert.ok(data.CATEGORIES.some(cat => cat.id === 
 
 run('assets/js/common.js');
 const links = ['tech', 'tools', 'etc'].map(route => Object.assign(element(), {dataset: {route}}));
-const header = {querySelector() { return null; }, querySelectorAll() { return links; }};
+const techCategories = ['news', 'sharing', 'incidents', 'security', 'ai'];
+const techLinks = techCategories.map(techCategory => ({dataset: {techCategory}}));
+const logoImage = {};
+const header = {querySelector(selector) { return selector === '.logo-img' ? logoImage : null; },
+  querySelectorAll(selector) { return selector === '[data-tech-category]' ? techLinks : links; }};
 document.querySelector = selector => selector === '.site-header' ? header : null;
 for (const base of ['', '/preview']) {
   document.scripts = [{src: 'https://is-an.github.io' + base + '/assets/js/common.js'}];
@@ -62,8 +68,68 @@ for (const base of ['', '/preview']) {
     assert.equal(links[0].href, base + '/guide/');
     assert.equal(links[1].href, base + '/tools/');
     assert.equal(links[2].href, base + '/faq/');
+    assert.equal(logoImage.src, base + '/isa-logo.svg');
+    assert.deepEqual(techLinks.map(link => link.href), techCategories.map(id => base + '/guide/#' + id));
   }
 }
+
+// Mobile menu: keyboard, outside click/focus, popup coordination, and resize.
+const menuListeners = {};
+const menuDocument = {
+  readyState: 'complete',
+  addEventListener(type, callback) { (menuListeners[type] ||= []).push(callback); },
+  dispatchEvent(event) { (menuListeners[event.type] || []).forEach(callback => callback(event)); }
+};
+const menuToggle = Object.assign(element(), {dataset: {}, focus() { menuDocument.activeElement = this; }});
+const menuLink = {focus() { menuDocument.activeElement = this; }};
+const menuNav = Object.assign(element(), {
+  querySelector() { return menuLink; },
+  contains(target) { return target === this || target === menuLink; }
+});
+menuToggle.contains = target => target === menuToggle;
+const menuHeader = {querySelector(selector) {
+  return selector === '#navToggle' ? menuToggle : selector === '#mainNav' ? menuNav : null;
+}};
+menuDocument.getElementById = () => ({querySelector() { return menuHeader; }});
+const mobile = {matches: true, addEventListener(type, callback) { this[type] = callback; }};
+const menuContext = vm.createContext({document: menuDocument, CustomEvent: context.CustomEvent,
+  window: {matchMedia() { return mobile; }},
+  translate: key => context.translate(key, 'en'), getCurrentLanguage: () => 'en'});
+vm.runInContext(fs.readFileSync('assets/js/header-nav.js', 'utf8'), menuContext);
+let lastPopup = null;
+menuDocument.addEventListener('v2:popup', event => { lastPopup = event.detail; });
+function openMenu() {
+  menuToggle.events.click();
+  assert.equal(menuToggle.attributes['aria-expanded'], 'true');
+  assert.ok(menuNav.classList.contains('is-open'));
+  assert.equal(menuDocument.activeElement, menuLink);
+  assert.equal(lastPopup, 'menu');
+  assert.equal(menuToggle.attributes['data-i18n-aria-label'], 'header_menu_close');
+}
+for (const detail of ['search', 'lang']) {
+  openMenu();
+  menuDocument.dispatchEvent({type: 'v2:popup', detail});
+  assert.equal(menuToggle.attributes['aria-expanded'], 'false');
+}
+openMenu();
+menuNav.events.keydown({key: 'Escape', preventDefault() {}, stopPropagation() {}});
+assert.equal(menuToggle.attributes['aria-expanded'], 'false');
+assert.equal(menuDocument.activeElement, menuToggle);
+for (const type of ['click', 'focusin']) {
+  openMenu();
+  menuDocument.dispatchEvent({type, target: {}});
+  assert.ok(!menuNav.classList.contains('is-open'));
+}
+openMenu();
+menuNav.events.click({target: {closest() { return menuLink; }}});
+assert.equal(menuToggle.attributes['aria-expanded'], 'false');
+openMenu();
+mobile.matches = false;
+mobile.change();
+assert.equal(menuToggle.attributes['aria-expanded'], 'false');
+menuToggle.events.click();
+assert.ok(!menuNav.classList.contains('is-open'), 'Desktop must not open a hidden mobile menu');
+
 context.localStorage.getItem = () => { throw new Error('Storage blocked'); };
 context.localStorage.setItem = () => { throw new Error('Quota exceeded'); };
 assert.equal(context.readStoredNumber('best'), 0);
