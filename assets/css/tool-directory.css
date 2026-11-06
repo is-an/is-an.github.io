@@ -1,5 +1,5 @@
 /* =========================================================
-   tool-directory.css — 홈과 tools의 공통 도구 목록 스타일
+   tool-directory.css - tools directory styles
    ---------------------------------------------------------
    로드 순서: style.css → v2.css → tool-directory.css
    모든 규칙은 .tool-directory 아래로 한정됩니다.
@@ -10,10 +10,6 @@
 .tool-directory .v2-hero {
   background: var(--v2-bg);
   padding: 32px 0 0;
-}
-.tool-directory .v2-eyebrow {
-  margin: 0 0 10px; font-family: var(--v2-mono); font-size: 11px; font-weight: 500;
-  letter-spacing: .14em; color: var(--v2-accent);
 }
 .tool-directory .v2-h1 {
   margin: 0 0 8px; font-size: var(--v2-title-size); font-weight: 600;
@@ -166,21 +162,6 @@
   padding: 11px 16px; min-height: 44px; background: var(--v2-invert); color: var(--v2-invert-text);
   border: 0; border-radius: 9px; font: 500 13px var(--v2-sans); cursor: pointer;
 }
-
-/* ---------- 소개 / 가이드 ---------- */
-.tool-directory .v2-two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 12px; }
-.tool-directory .v2-panel {
-  background: var(--v2-surface); border: 1px solid var(--v2-border);
-  border-radius: var(--v2-radius); padding: 22px 24px;
-}
-.tool-directory .v2-body-copy { margin: 8px 0 0; font-size: 13.5px; line-height: 1.75; color: var(--v2-text-2); text-wrap: pretty; }
-.tool-directory .v2-guide-list { margin-top: 10px; }
-.tool-directory .v2-guide {
-  display: flex; justify-content: space-between; gap: 14px;
-  padding: 10px 0; border-bottom: 1px solid var(--v2-border-soft); font-size: 13.5px;
-}
-.tool-directory .v2-guide:last-child { border-bottom: 0; }
-.tool-directory .v2-guide-tool { flex: none; font-size: 12px; color: var(--v2-faint); }
 
 /* ---------- 반응형 ---------- */
 @media (max-width: 980px) {

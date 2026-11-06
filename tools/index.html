@@ -21,8 +21,9 @@
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/v2.css">
   <link rel="stylesheet" href="../assets/css/tool-directory.css">
+  <link rel="stylesheet" href="../assets/css/blog-index.css">
 </head>
-<body class="v2-page tool-directory">
+<body class="v2-page tool-directory v2-editorial">
   <div id="site-header"></div>
 <main>
   <section class="v2-hero">
@@ -37,20 +38,81 @@
     </div>
   </section>
   <div class="v2-home-body">
-    <section class="v2-section" aria-labelledby="indexTitle">
-      <div class="v2-section-head">
-        <h2 class="v2-h2" id="indexTitle" data-i18n="home_index_title">전체 도구</h2>
-        <span class="v2-note" id="indexCount" aria-live="polite"></span>
+    <div>
+      <section class="v2-section" aria-labelledby="indexTitle">
+        <div class="v2-section-head">
+          <h2 class="v2-h2" id="indexTitle" data-i18n="home_index_title">전체 도구</h2>
+          <span class="v2-note" id="indexCount" aria-live="polite">
+          </span>
+        </div>
+        <div class="v2-empty" id="emptyState" hidden>
+          <p class="v2-empty-title" data-i18n="home_empty_title">검색 결과가 없습니다</p>
+          <p class="v2-empty-copy" data-i18n="home_empty_copy">다른 검색어를 입력하거나 전체 도구를 살펴보세요.</p>
+          <button type="button" class="v2-primary-btn" id="clearSearchBtn" data-i18n="home_empty_action">전체 도구 보기</button>
+        </div>
+        <div class="v2-index-grid" id="toolIndex">
+        </div>
+        <noscript>
+          <p>
+            <a href="../cal/" data-i18n="nav.calculator">계산기</a> · <a href="../games/" data-i18n="nav.games">게임</a> · <a href="../lotto/" data-i18n="nav.lotto">로또</a> · <a href="../saju/" data-i18n="nav.saju">사주</a>
+          </p>
+        </noscript>
+        <p class="v2-trust">
+          <a href="#guides" data-i18n="blog_guides">도구 활용 가이드</a> · <a href="../faq/" data-i18n="nav.faq">자주 묻는 질문</a> · <a href="../privacy/" data-i18n="footer.privacy">개인정보처리방침</a>
+        </p>
+      </section>
+      <section class="v2-editorial-guides" id="guides" aria-labelledby="guidesTitle">
+        <h2 class="v2-editorial-section-title" id="guidesTitle" data-i18n="blog_guides">도구 활용 가이드</h2>
+        <p data-i18n="blog_guides_copy">계산 기준과 도구 활용법을 예시로 살펴보세요.</p>
+        <div id="guideList">
+        </div>
+        <noscript>
+          <ul>
+            <li>
+              <a href="../guide/posts/example/">원리금균등상환과 원금균등상환, 무엇이 유리한가</a>
+            </li>
+            <li>
+              <a href="../guide/posts/salary-net-pay/">연봉 실수령액에서 빠지는 공제 항목 정리</a>
+            </li>
+            <li>
+              <a href="../guide/posts/legal-age/">만 나이 통일, 내 나이는 어떻게 계산되나</a>
+            </li>
+            <li>
+              <a href="../guide/posts/resume-charcount/">자기소개서 글자수, 공백 포함해서 세야 하나</a>
+            </li>
+            <li>
+              <a href="../guide/posts/savings-interest/">적금 이자가 생각보다 적은 이유</a>
+            </li>
+            <li>
+              <a href="../guide/posts/dca-investing/">적립식 투자(DCA)란 무엇인가</a>
+            </li>
+          </ul>
+        </noscript>
+      </section>
+    </div>
+    <aside class="v2-side">
+      <div class="v2-side-card" id="recentSection" hidden>
+        <div class="v2-side-head">
+          <span class="v2-side-dot" aria-hidden="true">
+          </span>
+          <h2 data-i18n="home_recent_title">최근 사용</h2>
+          <button type="button" class="v2-side-clear" id="clearRecentBtn" data-i18n="home_recent_clear">기록 지우기</button>
+        </div>
+        <div class="v2-side-list" id="recentList">
+        </div>
       </div>
-      <div class="v2-empty" id="emptyState" hidden>
-        <p class="v2-empty-title" data-i18n="home_empty_title">검색 결과가 없습니다</p>
-        <p class="v2-empty-copy" data-i18n="home_empty_copy">다른 검색어를 입력하거나 전체 도구를 살펴보세요.</p>
-        <button type="button" class="v2-primary-btn" id="clearSearchBtn" data-i18n="home_empty_action">전체 도구 보기</button>
+      <div class="v2-side-card" id="favoriteSection" hidden>
+        <div class="v2-side-head">
+          <span class="v2-side-dot" aria-hidden="true">
+          </span>
+          <h2 data-i18n="home_favorites_title">즐겨찾기</h2>
+        </div>
+        <div class="v2-side-list" id="favoriteList">
+        </div>
       </div>
-      <div class="v2-index-grid" id="toolIndex"></div>
-      <noscript><p><a href="../cal/" data-i18n="nav.calculator">계산기</a> · <a href="../games/" data-i18n="nav.games">게임</a> · <a href="../lotto/" data-i18n="nav.lotto">로또</a> · <a href="../saju/" data-i18n="nav.saju">사주</a></p></noscript>
-      <p class="v2-trust"><a href="../guide/" data-i18n="nav.guide">설명서</a> · <a href="../faq/" data-i18n="nav.faq">자주 묻는 질문</a> · <a href="../privacy/" data-i18n="footer.privacy">개인정보처리방침</a></p>
-    </section>
+      <div class="v2-ad-side" aria-hidden="true">
+      </div>
+    </aside>
   </div>
 </main>
   <div id="ads-slot" class="ads-slot"></div>
@@ -60,5 +122,6 @@
 <script src="../assets/js/header-nav.js"></script>
 <script src="../assets/js/tools-data.js"></script>
 <script src="../assets/js/tool-directory.js"></script>
+<script src="../assets/js/blog-index.js"></script>
 </body>
 </html>

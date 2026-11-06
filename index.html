@@ -17,8 +17,8 @@
       } catch (e) {}
     })();
   </script>
-  <title data-i18n="meta_title">무료 온라인 도구 모음 | 계산기, 변환기, 생성기</title>
-  <meta name="description" data-i18n-content="meta_description" content="계산기, 변환기, 생성기, 게임 등 15가지 무료 온라인 도구를 한곳에서 만나보세요.">
+  <title data-i18n="blog_meta_title">is-an | 기술 이야기와 도구 활용 블로그</title>
+  <meta name="description" data-i18n-content="blog_copy" content="기술 이야기와 도구 활용법을 기록하는 is-an 블로그입니다.">
   <meta name="keywords" content="계산기, 변환기, 도구, 무료 온라인 도구, 퍼센트 계산, 나이 계산, 글자수, 단위 변환, BMI, 연봉 계산, 대출 이자, 이미지 압축">
   <meta name="robots" content="index,follow">
   <meta name="google-site-verification" content="61Wo6IhItM5xXEOkCjBKGPx4UuRBeWKJD5er1pICJy4" />
@@ -29,27 +29,13 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="is-an.github.io">
   <meta property="og:url" content="https://is-an.github.io/">
-  <meta property="og:title" data-i18n-content="og_title" content="무료 온라인 도구 모음">
-  <meta property="og:description" data-i18n-content="og_description" content="퍼센트, 나이, 글자수, 단위 변환, BMI, 연봉, 대출, 이미지 처리 등 15개 도구 모음">
+  <meta property="og:title" data-i18n-content="blog_meta_title" content="is-an | 기술 이야기와 도구 활용 블로그">
+  <meta property="og:description" data-i18n-content="blog_copy" content="기술 이야기와 도구 활용법을 기록하는 is-an 블로그입니다.">
   <meta property="og:image" content="https://is-an.github.io/isa-logo.png">
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "무료 온라인 도구 모음",
-    "description": "퍼센트 계산기, 나이 계산기, 글자수 세기, 단위 변환기 등 15개의 유용한 도구 모음",
-    "url": "./",
-    "applicationCategory": "UtilityApplication",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "KRW"
-    }
-  }
-  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Blog", "name": "is-an", "description": "기술 이야기와 도구 활용법을 기록하는 is-an 블로그입니다.", "url": "https://is-an.github.io/", "inLanguage": "ko"}</script>
 
   <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
@@ -65,83 +51,41 @@
 
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="stylesheet" href="./assets/css/v2.css">
-  <link rel="stylesheet" href="./assets/css/tool-directory.css">
+  <link rel="stylesheet" href="./assets/css/blog-index.css">
 </head>
-<body class="v2-page home-v2 tool-directory">
+<body class="v2-page home-v2 v2-editorial">
   <div id="site-header"></div>
 
 <main>
-  <!-- ========== 히어로 + 검색 ========== -->
-  <section class="v2-hero">
-    <div class="v2-container">
-      <p class="v2-eyebrow" data-i18n="home_eyebrow">무료 온라인 도구</p>
-      <h1 class="v2-h1" data-i18n="home_title">필요한 계산, 여기서 바로</h1>
-      <p class="v2-lede" data-i18n="home_copy">계산기·변환기·게임·로또·사주까지, 자주 쓰는 도구를 한곳에 모았습니다.</p>
-
-      <form class="v2-search" role="search" onsubmit="return false;">
-        <label class="v2-visually-hidden" for="toolSearch" data-i18n="home_searchLabel">도구 검색</label>
-        <input type="text" id="toolSearch" class="v2-search-input" autocomplete="off"
-               data-i18n-placeholder="home_searchPlaceholder" placeholder="도구 검색... (예: BMI, 연봉, 로또)">
-        <button type="button" class="v2-search-btn" id="toolSearchBtn" data-i18n="home_searchButton">검색</button>
-      </form>
-
-      <p class="v2-trust" data-i18n="home_trust">회원가입 없이 · 브라우저에서 계산 · 완전 무료</p>
-    </div>
-  </section>
-
-  <div class="v2-home-body">
-    <div>
-
-      <!-- ========== 전체 도구 ========== -->
-      <section class="v2-section">
-        <div class="v2-section-head">
-          <h2 class="v2-h2" id="indexTitle" data-i18n="home_index_title">전체 도구</h2>
-          <span class="v2-note" id="indexCount"></span>
+  <div class="v2-simple-layout">
+    <header class="v2-editorial-heading">
+      <h1 class="v2-page-title" data-i18n="blog_title">기술을 읽고, 일상에 써먹다</h1>
+      <p class="v2-page-lede" data-i18n="blog_copy">기술 이야기와 도구 활용법을 기록하는 is-an 블로그입니다.</p>
+    </header>
+    <div class="v2-editorial-layout">
+      <section aria-labelledby="readingTitle">
+        <h2 class="v2-editorial-section-title" id="readingTitle" data-i18n="blog_recommended">읽어볼 글</h2>
+        <div id="guideList">
         </div>
-        <div class="v2-empty" id="emptyState" hidden>
-          <p class="v2-empty-title" data-i18n="home_empty_title">검색 결과가 없습니다</p>
-          <p class="v2-empty-copy" data-i18n="home_empty_copy">다른 검색어를 입력하거나 전체 도구를 살펴보세요.</p>
-          <button type="button" class="v2-primary-btn" id="clearSearchBtn" data-i18n="home_empty_action">전체 도구 보기</button>
-        </div>
-        <div class="v2-index-grid" id="toolIndex"></div>
+        <noscript>
+          <a href="tools/#guides" data-i18n="blog_guides">도구 활용 가이드</a>
+        </noscript>
       </section>
-
-      <!-- ========== 사이트 소개 + 가이드 ========== -->
-      <section class="v2-section v2-two-col">
-        <div class="v2-panel">
-          <h2 class="v2-h2-sm" data-i18n="home_about_title">is-an 도구 모음이란</h2>
-          <p class="v2-body-copy" data-i18n="home_about_copy">is-an은 회원가입 없이 바로 쓰는 무료 온라인 도구 모음입니다. 연봉·대출·나이 계산부터 단위 변환, 미니게임, 로또번호 생성까지 자주 찾는 기능을 모았습니다. 모든 계산은 브라우저에서 처리되어 입력값이 서버로 전송되지 않습니다.</p>
-        </div>
-        <div class="v2-panel">
-          <h2 class="v2-h2-sm" data-i18n="home_guides_title">계산 가이드</h2>
-          <div class="v2-guide-list" id="guideList"></div>
-        </div>
-      </section>
+      <aside class="v2-editorial-side">
+        <h2 data-i18n="tech_categories">tech 하위 카테고리</h2>
+        <nav>
+          <a href="guide/#news" data-i18n="tech_news">기술뉴스</a>
+          <a href="guide/#sharing" data-i18n="tech_sharing">기술공유</a>
+          <a href="guide/#incidents" data-i18n="tech_incidents">장애노트</a>
+          <a href="guide/#security" data-i18n="tech_security">보안</a>
+          <a href="guide/#ai" data-i18n="tech_ai">AI·자동화</a>
+        </nav>
+        <hr>
+        <h2 data-i18n="blog_about">is-an 블로그</h2>
+        <p data-i18n="blog_about_copy">기술의 변화와 직접 겪은 경험을 나눕니다. 생활에 필요한 계산기와 도구도 함께 만듭니다.</p>
+        <a href="tools/" data-i18n="blog_tools">도구 찾아보기</a>
+      </aside>
     </div>
-
-    <!-- ========== 사이드바: 최근 사용 / 즐겨찾기 ========== -->
-    <aside class="v2-side">
-      <div class="v2-side-card" id="recentSection" hidden>
-        <div class="v2-side-head">
-          <span class="v2-side-dot" aria-hidden="true"></span>
-          <h2 data-i18n="home_recent_title">최근 사용</h2>
-          <button type="button" class="v2-side-clear" id="clearRecentBtn" data-i18n="home_recent_clear">기록 지우기</button>
-        </div>
-        <div class="v2-side-list" id="recentList"></div>
-      </div>
-
-      <div class="v2-side-card" id="favoriteSection" hidden>
-        <div class="v2-side-head">
-          <span class="v2-side-dot" aria-hidden="true"></span>
-          <h2 data-i18n="home_favorites_title">즐겨찾기</h2>
-        </div>
-        <div class="v2-side-list" id="favoriteList"></div>
-      </div>
-      
-      <div class="v2-ad-side" aria-hidden="true"></div>
-
-      <p class="v2-side-note">모든 계산은 브라우저에서 처리되어 입력값이 서버로 전송되지 않습니다.</p>
-    </aside>
   </div>
 </main>
 
@@ -151,6 +95,6 @@
 <script src="./assets/js/common.js"></script>
 <script src="./assets/js/header-nav.js"></script>
 <script src="./assets/js/tools-data.js"></script>
-<script src="./assets/js/tool-directory.js"></script>
+<script src="./assets/js/blog-index.js"></script>
 </body>
 </html>

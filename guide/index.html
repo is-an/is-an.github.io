@@ -20,115 +20,66 @@
   <link rel="canonical" href="https://is-an.github.io/guide/">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/v2.css">
-  <link rel="stylesheet" href="../assets/css/tech.css">
+  <link rel="stylesheet" href="../assets/css/blog-index.css">
 </head>
-<body class="v2-page tech-page">
+<body class="v2-page tech-page v2-editorial">
   <div id="site-header"></div>
   <main>
-    <div class="v2-simple-layout">
-      <nav class="v2-crumb" aria-label="현재 위치">
-        <a href="../" data-i18n="nav.home">홈</a>
-        <span aria-hidden="true">›</span>
-        <span class="v2-crumb-current">tech</span>
-      </nav>
-
+  <div class="v2-simple-layout">
+    <nav class="v2-crumb" aria-label="현재 위치">
+      <a href="../" data-i18n="nav.home">홈</a>
+      <span aria-hidden="true">›</span>
+      <span class="v2-crumb-current">tech</span>
+    </nav>
+    <header class="v2-editorial-heading">
       <h1 class="v2-page-title">tech</h1>
       <p class="v2-page-lede" data-i18n="tech_copy">기술뉴스, 개발 경험, 장애 해결, 보안과 AI 활용을 기록합니다. 다섯 가지 주제별로 글을 찾아보세요.</p>
-
-      <nav class="v2-tech-nav" data-i18n-aria-label="tech_categories" aria-label="tech 하위 카테고리">
-        <a href="#news" data-i18n="tech_news">기술뉴스</a>
-        <a href="#sharing" data-i18n="tech_sharing">기술공유</a>
-        <a href="#incidents" data-i18n="tech_incidents">장애노트</a>
-        <a href="#security" data-i18n="tech_security">보안</a>
-        <a href="#ai" data-i18n="tech_ai">AI·자동화</a>
-      </nav>
-      <div class="v2-tech-categories">
-        <section class="v2-card v2-tech-category" id="news" tabindex="-1" aria-labelledby="newsTitle">
+    </header>
+    <div class="v2-editorial-layout">
+      <div>
+        <section class="v2-tech-category" id="news" tabindex="-1" aria-labelledby="newsTitle">
           <h2 class="v2-card-title" id="newsTitle" data-i18n="tech_news">기술뉴스</h2>
           <p class="v2-card-copy" data-i18n="tech_news_copy">IT 동향과 신기술, 제품·서비스 업데이트를 살펴봅니다.</p>
           <p class="v2-tech-empty" data-i18n="tech_empty">아직 등록된 글이 없습니다.</p>
         </section>
-        <section class="v2-card v2-tech-category" id="sharing" tabindex="-1" aria-labelledby="sharingTitle">
+        <section class="v2-tech-category" id="sharing" tabindex="-1" aria-labelledby="sharingTitle">
           <h2 class="v2-card-title" id="sharingTitle" data-i18n="tech_sharing">기술공유</h2>
           <p class="v2-card-copy" data-i18n="tech_sharing_copy">개발·서버·네트워크 구축과 설정, 실습 경험을 공유합니다.</p>
           <p class="v2-tech-empty" data-i18n="tech_empty">아직 등록된 글이 없습니다.</p>
         </section>
-        <section class="v2-card v2-tech-category" id="incidents" tabindex="-1" aria-labelledby="incidentsTitle">
+        <section class="v2-tech-category" id="incidents" tabindex="-1" aria-labelledby="incidentsTitle">
           <h2 class="v2-card-title" id="incidentsTitle" data-i18n="tech_incidents">장애노트</h2>
           <p class="v2-card-copy" data-i18n="tech_incidents_copy">장애 증상과 원인, 해결 과정과 재발 방지 방법을 기록합니다.</p>
           <p class="v2-tech-empty" data-i18n="tech_empty">아직 등록된 글이 없습니다.</p>
         </section>
-        <section class="v2-card v2-tech-category" id="security" tabindex="-1" aria-labelledby="securityTitle">
+        <section class="v2-tech-category" id="security" tabindex="-1" aria-labelledby="securityTitle">
           <h2 class="v2-card-title" id="securityTitle" data-i18n="tech_security">보안</h2>
           <p class="v2-card-copy" data-i18n="tech_security_copy">보안뉴스와 취약점·패치, 보안 설정과 대응 방법을 다룹니다.</p>
           <p class="v2-tech-empty" data-i18n="tech_empty">아직 등록된 글이 없습니다.</p>
         </section>
-        <section class="v2-card v2-tech-category" id="ai" tabindex="-1" aria-labelledby="aiTitle">
+        <section class="v2-tech-category" id="ai" tabindex="-1" aria-labelledby="aiTitle">
           <h2 class="v2-card-title" id="aiTitle" data-i18n="tech_ai">AI·자동화</h2>
           <p class="v2-card-copy" data-i18n="tech_ai_copy">AI 활용 사례와 업무 자동화, 스크립트 작성 경험을 모읍니다.</p>
           <p class="v2-tech-empty" data-i18n="tech_empty">아직 등록된 글이 없습니다.</p>
         </section>
       </div>
-
-      <h2 class="v2-card-title v2-tech-guides" data-i18n="tech_guides">기존 도구 활용 가이드</h2>
-      <section class="blog-list" aria-label="설명서 글 목록">
-        <article class="v2-card blog-card">
-          <div class="blog-meta">
-            <time datetime="2026-09-01">2026년 9월 1일</time>
-            <span>금융</span>
-          </div>
-          <h2 class="v2-card-title">원리금균등상환과 원금균등상환, 무엇이 유리한가</h2>
-          <p class="v2-card-copy">대출 상환 방식의 차이와 총 이자 비교, 상황별 선택 기준을 예시와 함께 정리했습니다.</p>
-          <a class="blog-read-link" href="./posts/example/" data-i18n="guide.read">읽기</a>
-        </article>
-        <article class="v2-card blog-card">
-          <div class="blog-meta">
-            <time datetime="2026-09-01">2026년 9월 1일</time>
-            <span>금융</span>
-          </div>
-          <h2 class="v2-card-title">연봉 실수령액에서 빠지는 공제 항목 정리</h2>
-          <p class="v2-card-copy">세전 월급에서 4대 보험료와 세금이 어떻게 빠지는지, 비과세와 연말정산의 영향을 설명합니다.</p>
-          <a class="blog-read-link" href="./posts/salary-net-pay/" data-i18n="guide.read">읽기</a>
-        </article>
-        <article class="v2-card blog-card">
-          <div class="blog-meta">
-            <time datetime="2026-09-01">2026년 9월 1일</time>
-            <span>생활</span>
-          </div>
-          <h2 class="v2-card-title">만 나이 통일, 내 나이는 어떻게 계산되나</h2>
-          <p class="v2-card-copy">만 나이·연 나이·세는 나이의 차이와 계산 방법을 예시로 정리했습니다.</p>
-          <a class="blog-read-link" href="./posts/legal-age/" data-i18n="guide.read">읽기</a>
-        </article>
-        <article class="v2-card blog-card">
-          <div class="blog-meta">
-            <time datetime="2026-09-01">2026년 9월 1일</time>
-            <span>생활</span>
-          </div>
-          <h2 class="v2-card-title">자기소개서 글자수, 공백 포함해서 세야 하나</h2>
-          <p class="v2-card-copy">지원서 글자수 기준, 공백 포함·제외 차이, 바이트 제한의 의미를 설명합니다.</p>
-          <a class="blog-read-link" href="./posts/resume-charcount/" data-i18n="guide.read">읽기</a>
-        </article>
-        <article class="v2-card blog-card">
-          <div class="blog-meta">
-            <time datetime="2026-09-01">2026년 9월 1일</time>
-            <span>금융</span>
-          </div>
-          <h2 class="v2-card-title">적금 이자가 생각보다 적은 이유</h2>
-          <p class="v2-card-copy">표시 금리가 같아도 적금 이자가 예금보다 적은 이유와 이자소득세 15.4%를 예시로 설명합니다.</p>
-          <a class="blog-read-link" href="./posts/savings-interest/" data-i18n="guide.read">읽기</a>
-        </article>
-        <article class="v2-card blog-card">
-          <div class="blog-meta">
-            <time datetime="2026-09-01">2026년 9월 1일</time>
-            <span>투자</span>
-          </div>
-          <h2 class="v2-card-title">적립식 투자(DCA)란 무엇인가</h2>
-          <p class="v2-card-copy">매달 같은 금액을 투자하는 방식의 원리, 장점과 한계, 백테스트로 확인하는 방법을 정리했습니다.</p>
-          <a class="blog-read-link" href="./posts/dca-investing/" data-i18n="guide.read">읽기</a>
-        </article>
-      </section>
+      <aside class="v2-editorial-side">
+        <h2 data-i18n="tech_categories">tech 하위 카테고리</h2>
+        <nav>
+          <a href="#news" data-i18n="tech_news">기술뉴스</a>
+          <a href="#sharing" data-i18n="tech_sharing">기술공유</a>
+          <a href="#incidents" data-i18n="tech_incidents">장애노트</a>
+          <a href="#security" data-i18n="tech_security">보안</a>
+          <a href="#ai" data-i18n="tech_ai">AI·자동화</a>
+        </nav>
+        <hr>
+        <h2 data-i18n="blog_about">is-an 블로그</h2>
+        <p data-i18n="blog_about_copy">기술의 변화와 직접 겪은 경험을 나눕니다. 생활에 필요한 계산기와 도구도 함께 만듭니다.</p>
+        <a href="../tools/" data-i18n="blog_tools">도구 찾아보기</a>
+      </aside>
     </div>
-  </main>
+  </div>
+</main>
   <div id="ads-slot" class="ads-slot"></div>
   <div id="site-footer"></div>
   <script src="../assets/js/i18n.js"></script>

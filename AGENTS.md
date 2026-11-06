@@ -95,7 +95,7 @@ tools belong under the tools navigation section, without moving their URLs.
 At 760px and below, primary navigation opens from a hamburger button as a
 nonmodal popup. Desktop navigation stays inline. Tech has five fragment-based
 categories at `/guide/#news`, `#sharing`, `#incidents`, `#security`, and `#ai`.
-Existing guide articles remain at their original URLs below those categories.
+Existing guide articles retain their original URLs; their index is at `/tools/#guides`.
 
 Header:
 
@@ -125,10 +125,10 @@ assets/css/v2.css
 → v2 design system + shared v2 components
 
 tool-directory.css
-→ shared home/tools directory layout
+→ tools directory layout
 
-tech.css
-→ tech category index at /guide/
+blog-index.css
+→ blog home, tech index, and tools reading list
 
 saju.css
 → saju only
@@ -409,8 +409,9 @@ Do not create another popup state system.
 
 Search may lazy-load `tools-data.js`.
 
-`assets/js/tool-directory.js` renders the home and tools directories from
-`SITE_TOOLS`. `v2:language` is dispatched after initial language loading or
+`assets/js/tool-directory.js` renders the tools directory from
+`SITE_TOOLS`. `assets/js/blog-index.js` renders article lists from `SITE_TOOLS.GUIDES` on
+the home and tools pages. `v2:language` is dispatched after initial language loading or
 language selection so dynamic directory labels/search can refresh.
 
 ---

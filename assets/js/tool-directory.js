@@ -1,5 +1,5 @@
 /* =========================================================
-   tool-directory.js — 홈과 tools의 도구 목록 / 검색 / 즐겨찾기 / 최근 사용
+   tool-directory.js - tools search, favorites, and recently used tools
    ---------------------------------------------------------
    ▸ 데이터는 assets/js/tools-data.js 한 곳에서만 옵니다.
    ▸ 전역 스크립트 (ES 모듈 아님). common.js 다음에 로드합니다.
@@ -46,8 +46,7 @@
     recent: document.getElementById('recentList'),
     clearRecent: document.getElementById('clearRecentBtn'),
     favSection: document.getElementById('favoriteSection'),
-    favs: document.getElementById('favoriteList'),
-    guides: document.getElementById('guideList')
+    favs: document.getElementById('favoriteList')
   };
 
   function byId(id) {
@@ -205,18 +204,6 @@
     el.layout.classList.toggle('has-side', visible);
   }
 
-  function renderGuides() {
-    if (!el.guides) { return; }
-    el.guides.innerHTML = '';
-    DATA.GUIDES.forEach(function (g) {
-      var a = node('a', 'v2-guide');
-      a.href = url(g.href);
-      a.appendChild(node('span', null, g.title));
-      a.appendChild(node('span', 'v2-guide-tool', g.tool));
-      el.guides.appendChild(a);
-    });
-  }
-
   function render() {
     renderIndex();
     renderRecent();
@@ -256,6 +243,5 @@
 
   document.addEventListener('v2:language', render);
 
-  renderGuides();
   render();
 })();

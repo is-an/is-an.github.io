@@ -41,7 +41,8 @@ for (const lang of ['ko', 'en', 'zh', 'ja']) {
       'header_search_loading', 'header_search_hint', 'directory_meta_title', 'directory_title', 'directory_copy',
       'directory_favorite', 'directory_unfavorite',
       'footer_toolsTitle', 'footer_infoTitle', 'footer_brand_copy', 'footer_privacy_note',
-      ...Object.keys(context.window.I18N_DATA.ko).filter(key => /^(tech_|header_menu_)/.test(key)),
+      ...Object.keys(context.window.I18N_DATA.ko).filter(key => /^(tech_|blog_|header_menu_)/.test(key)),
+      ...data.GUIDES.flatMap(guide => [guide.key, guide.descKey]),
       ...data.TOOLS.flatMap(tool => [tool.key, tool.descKey])]) {
     assert.ok(key, 'Tool translation key missing');
     const translated = context.translate(key, lang);
@@ -52,6 +53,21 @@ for (const lang of ['ko', 'en', 'zh', 'ja']) {
 for (const tool of data.TOOLS) assert.ok(data.CATEGORIES.some(cat => cat.id === tool.cat), 'Unknown category');
 
 run('assets/js/common.js');
+// Both reading lists use the six canonical articles, including a prefixed deployment.
+for (const base of ['', '/preview']) {
+  const readingList = element();
+  document.scripts = [{src: 'https://is-an.github.io' + base + '/assets/js/common.js'}];
+  document.getElementById = id => id === 'guideList' ? readingList : null;
+  run('assets/js/blog-index.js');
+  assert.equal(readingList.children.length, 6);
+  assert.deepEqual(readingList.children.map(article => article.children[1].children[0].href),
+    Array.from(data.GUIDES, guide => base + guide.href));
+  for (const article of readingList.children) {
+    assert.equal(article.children[0].dateTime, '2026-09-01');
+    assert.ok(article.children[2].attributes['data-i18n']);
+  }
+}
+document.getElementById = () => null;
 const links = ['tech', 'tools', 'etc'].map(route => Object.assign(element(), {dataset: {route}}));
 const techCategories = ['news', 'sharing', 'incidents', 'security', 'ai'];
 const techLinks = techCategories.map(techCategory => ({dataset: {techCategory}}));

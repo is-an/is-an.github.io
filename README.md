@@ -10,7 +10,8 @@ HTML·CSS·Vanilla JavaScript로 만든 무료 유틸리티 사이트입니다.
 - `etc` → `/faq/`: FAQ와 사이트 정보
 
 tech의 다섯 분류는 `/guide/#news`, `#sharing`, `#incidents`, `#security`, `#ai`로 연결됩니다.
-아직 새 글이 없는 분류는 빈 상태를 표시하며, 기존 가이드 글과 주소는 그대로 유지합니다.
+메인과 tech는 글 목록 중심의 블로그 화면입니다. 아직 새 글이 없는 tech 분류는 빈 상태를 표시합니다.
+기존 도구 가이드 6편은 `/tools/#guides`에서 찾을 수 있으며 본문 주소는 유지합니다.
 760px 이하에서는 상위 메뉴와 tech 하위 분류를 햄버거 팝업으로 표시합니다.
 검색·언어·메뉴 팝업은 한 번에 하나만 열립니다.
 
@@ -51,11 +52,12 @@ UI 변경은 320·375·768·1024·1440px와 라이트/다크·4개 언어를 실
 
 - `components/`: 공용 헤더·푸터·광고
 - `assets/css/v2.css`: 공용 v2 스타일과 반응형 헤더
-- `assets/css/tool-directory.css`: 홈·tools의 공용 목록 레이아웃
-- `assets/css/tech.css`: tech 분류 화면
+- `assets/css/tool-directory.css`: tools 목록 레이아웃
+- `assets/css/blog-index.css`: 메인·tech 블로그와 도구 가이드 목록
 - `assets/js/common.js`: 컴포넌트 로더·경로·테마·공용 기능
 - `assets/js/header-nav.js`: 모바일 메뉴·도구 검색 팝업
-- `assets/js/tool-directory.js`: 홈·tools의 검색·목록·즐겨찾기·최근 사용
+- `assets/js/tool-directory.js`: tools의 검색·목록·즐겨찾기·최근 사용
+- `assets/js/blog-index.js`: 공용 가이드 데이터로 메인·tools 글 목록 표시
 - `assets/js/i18n.js`, `assets/i18n/`: 번역과 언어 전환
 - `scripts/check-site.py`, `scripts/check-navigation.js`: 설치 없는 정적·회귀 검사
 

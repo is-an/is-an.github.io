@@ -114,10 +114,54 @@ window.SITE_TOOLS = (function () {
   ];
 
   var GUIDES = [
-    { title: '원리금균등상환과 원금균등상환, 무엇이 유리한가', href: '/guide/posts/example/', tool: '대출 이자 계산기' },
-    { title: '연봉 실수령액에서 빠지는 공제 항목 정리', href: '/guide/posts/salary-net-pay/', tool: '연봉 계산기' },
-    { title: '만 나이 통일, 내 나이는 어떻게 계산되나', href: '/guide/posts/legal-age/', tool: '나이 계산기' },
-    { title: '적금 이자가 생각보다 적은 이유', href: '/guide/posts/savings-interest/', tool: '예금/적금 이자 계산기' }
+    {
+      "title": "원리금균등상환과 원금균등상환, 무엇이 유리한가",
+      "key": "blog_loan_title",
+      "href": "/guide/posts/example/",
+      "date": "2026-09-01",
+      "desc": "대출 상환 방식의 차이와 상황별 선택 기준을 정리했습니다.",
+      "descKey": "blog_loan_desc"
+    },
+    {
+      "title": "연봉 실수령액에서 빠지는 공제 항목 정리",
+      "key": "blog_salary_title",
+      "href": "/guide/posts/salary-net-pay/",
+      "date": "2026-09-01",
+      "desc": "연봉에서 보험료와 세금이 공제되는 과정을 살펴봅니다.",
+      "descKey": "blog_salary_desc"
+    },
+    {
+      "title": "만 나이 통일, 내 나이는 어떻게 계산되나",
+      "key": "blog_age_title",
+      "href": "/guide/posts/legal-age/",
+      "date": "2026-09-01",
+      "desc": "만 나이·연 나이·세는 나이의 계산 방법을 비교합니다.",
+      "descKey": "blog_age_desc"
+    },
+    {
+      "title": "자기소개서 글자수, 공백 포함해서 세야 하나",
+      "key": "blog_char_title",
+      "href": "/guide/posts/resume-charcount/",
+      "date": "2026-09-01",
+      "desc": "글자수와 공백, 바이트 제한의 차이를 설명합니다.",
+      "descKey": "blog_char_desc"
+    },
+    {
+      "title": "적금 이자가 생각보다 적은 이유",
+      "key": "blog_savings_title",
+      "href": "/guide/posts/savings-interest/",
+      "date": "2026-09-01",
+      "desc": "예금과 적금의 이자 계산 방식이 다른 이유를 알아봅니다.",
+      "descKey": "blog_savings_desc"
+    },
+    {
+      "title": "적립식 투자(DCA)란 무엇인가",
+      "key": "blog_dca",
+      "href": "/guide/posts/dca-investing/",
+      "date": "2026-09-01",
+      "desc": "정기적으로 같은 금액을 투자하는 방식의 원리와 한계를 정리합니다.",
+      "descKey": "blog_dca_desc"
+    }
   ];
 
   return { CATEGORIES: CATEGORIES, TOOLS: TOOLS, GUIDES: GUIDES };
