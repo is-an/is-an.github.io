@@ -23,6 +23,7 @@
   gap: 16px;
 }
 .tech-page .v2-tech-category { scroll-margin-top: calc(var(--v2-header-h) + 20px); }
+.tech-page .v2-tech-categories .v2-card { margin: 0; }
 .tech-page .v2-tech-category:target { border-color: var(--v2-accent); }
 .tech-page .v2-tech-empty { margin: 18px 0 0; font-size: 13px; color: var(--v2-muted); }
 .tech-page .v2-tech-guides { margin: 40px 0 20px; }

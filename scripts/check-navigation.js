@@ -14,6 +14,7 @@ function element() {
       toggle(name, force) { if (force) classes.add(name); else classes.delete(name); }
     },
     setAttribute(name, value) { this.attributes[name] = value; },
+    getAttribute(name) { return this.attributes[name]; },
     removeAttribute(name) { delete this.attributes[name]; },
     appendChild(child) { this.children.push(child); },
     addEventListener(name, callback) { this.events[name] = callback; },
@@ -39,6 +40,7 @@ for (const lang of ['ko', 'en', 'zh', 'ja']) {
   for (const key of ['header_home', 'header_navigation', 'header_search_close', 'header_search_error',
       'header_search_loading', 'header_search_hint', 'directory_meta_title', 'directory_title', 'directory_copy',
       'directory_favorite', 'directory_unfavorite',
+      'footer_toolsTitle', 'footer_infoTitle', 'footer_brand_copy', 'footer_privacy_note',
       ...Object.keys(context.window.I18N_DATA.ko).filter(key => /^(tech_|header_menu_)/.test(key)),
       ...data.TOOLS.flatMap(tool => [tool.key, tool.descKey])]) {
     assert.ok(key, 'Tool translation key missing');
@@ -72,6 +74,23 @@ for (const base of ['', '/preview']) {
     assert.deepEqual(techLinks.map(link => link.href), techCategories.map(id => base + '/guide/#' + id));
   }
 }
+
+// Footer links and logo must work at the site root and under a repository prefix.
+for (const base of ['', '/preview']) {
+  const footerLinks = ['/', '/guide/', '/tools/', '/faq/', '/privacy/'].map(href => {
+    const link = element(); link.setAttribute('href', href); return link;
+  });
+  const footerLogo = {};
+  const footer = {querySelectorAll() { return footerLinks; }, querySelector() { return footerLogo; }};
+  document.querySelector = selector => selector === '.v2-footer' ? footer : null;
+  document.scripts = [{src: 'https://is-an.github.io' + base + '/assets/js/common.js'}];
+  context.applyFooterLinks();
+  context.applyFooterLinks();
+  assert.deepEqual(footerLinks.map(link => link.getAttribute('href')),
+    ['/', '/guide/', '/tools/', '/faq/', '/privacy/'].map(href => base + href));
+  assert.equal(footerLogo.src, base + '/isa-logo.svg');
+}
+assert.equal(context.translate('footer.toolsTitle', 'ko'), '\uCE74\uD14C\uACE0\uB9AC');
 
 // Mobile menu: keyboard, outside click/focus, popup coordination, and resize.
 const menuListeners = {};

@@ -6,8 +6,8 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "theme_color": "#222",
-  "background_color": "#f7f7f7",
+  "theme_color": "#10274c",
+  "background_color": "#f5f7fb",
   "screenshots": [
     {
       "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><rect fill='%23f7f7f7' width='540' height='720'/><text x='50%' y='50%' font-size='48' font-weight='bold' text-anchor='middle' dy='.3em' fill='%23222'>도구 모음</text></svg>",

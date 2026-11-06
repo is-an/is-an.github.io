@@ -281,6 +281,20 @@ function applyHeaderLinks() {
   });
 }
 
+function applyFooterLinks() {
+  const footer = document.querySelector('.v2-footer');
+  if (!footer) { return; }
+  const siteRootPath = getSiteBasePath();
+  footer.querySelectorAll('a[href^="/"]').forEach((link) => {
+    const href = link.getAttribute('href');
+    if (siteRootPath && !href.startsWith(siteRootPath + '/')) {
+      link.setAttribute('href', siteRootPath + href);
+    }
+  });
+  const logoImage = footer.querySelector('.v2-footer-logo-img');
+  if (logoImage) { logoImage.src = `${siteRootPath}/isa-logo.svg`; }
+}
+
 function loadComponent(targetId, componentPath) {
   const target = document.getElementById(targetId);
   if (!target) {
@@ -303,6 +317,7 @@ function loadComponent(targetId, componentPath) {
           attachLanguageSwitcher();
         }
       }
+      if (targetId === 'site-footer') { applyFooterLinks(); }
       if (typeof applyLanguage === 'function' && typeof getCurrentLanguage === 'function') {
         applyLanguage(getCurrentLanguage());
       }

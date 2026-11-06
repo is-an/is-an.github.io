@@ -96,8 +96,9 @@ const legacyTranslations = {
     nav_guide: "설명서",
     nav_faq: "자주 묻는 질문",
 
-    footer_toolsTitle: "도구 모음",
-    footer_infoTitle: "정보",
+    footer_toolsTitle: "카테고리",
+    footer_infoTitle: "이용 안내",
+    footer_brand_copy: "기술을 읽고, 일상에 필요한 도구를 씁니다.",
     footer_socialTitle: "소셜",
     footer_calculatorLink: "계산기",
     footer_lottoLink: "로또",
@@ -815,7 +816,7 @@ const homeIndexTranslations = {
     home_empty_copy: '다른 검색어를 입력하거나 전체 도구를 살펴보세요.', home_empty_action: '전체 도구 보기',
     home_guides_title: '계산 가이드',
     header_tagline: '도구 모음', header_menuLabel: '메뉴 열기',
-    footer_privacy_note: '모든 계산은 브라우저에서 처리되어 입력값이 서버로 전송되지 않습니다.'
+    footer_privacy_note: '개인정보 및 광고·쿠키 안내'
   }
 };
 

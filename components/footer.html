@@ -1,43 +1,35 @@
 <footer class="site-footer v2-footer">
-  <div class="container footer-inner v2-footer-inner">
-
+  <div class="footer-inner v2-footer-inner">
     <div class="footer-section v2-footer-brand">
-      <div class="v2-footer-logo">
+      <a class="v2-footer-logo" href="/" data-i18n-aria-label="header_home" aria-label="is-an 홈">
+        <img src="/isa-logo.svg" alt="" class="v2-footer-logo-img" width="32" height="32">
         <span class="v2-footer-wordmark">is-an</span>
-      </div>
-      <p class="v2-footer-copy">&copy; 2026 is-an Labs.</p>
+      </a>
+      <p class="v2-footer-description" data-i18n="footer_brand_copy">기술을 읽고, 일상에 필요한 도구를 씁니다.</p>
+      <a class="v2-footer-source" href="https://github.com/is-an" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
 
-    <div class="footer-section">
-      <h4 data-i18n="footer.toolsTitle">서비스</h4>
-      <p class="v2-footer-links">
-        <a href="/guide/">tech</a>
-        <a href="/tools/">tools</a>
-        <a href="/faq/">etc</a>
-      </p>
-    </div>
+    <nav class="footer-section" aria-labelledby="footerCategoriesTitle">
+      <h2 class="v2-footer-heading" id="footerCategoriesTitle" data-i18n="footer.toolsTitle">카테고리</h2>
+      <ul class="v2-footer-links">
+        <li><a href="/guide/">tech</a></li>
+        <li><a href="/tools/">tools</a></li>
+        <li><a href="/faq/">etc</a></li>
+      </ul>
+    </nav>
 
-    <div class="footer-section">
-      <h4 data-i18n="footer.infoTitle">정보</h4>
-      <p class="v2-footer-links">
-        <a href="/" data-i18n="footer.home">홈</a>
-        <a href="/guide/" data-i18n="footer.guide">설명서</a>
-        <a href="/faq/" data-i18n="footer.faq">FAQ</a>
-        <a href="/privacy/" data-i18n="footer.privacy">개인정보처리방침</a>
-        <a href="mailto:isablog@naver.com?subject=%5Bis-an%5D%20%EC%9D%98%EA%B2%AC%20%EB%B3%B4%EB%82%B4%EA%B8%B0" data-i18n="footer.contact">의견 보내기</a>
-      </p>
-    </div>
-
-    <div class="footer-section">
-      <h4 data-i18n="footer.socialTitle">소셜</h4>
-      <p class="v2-footer-links">
-        <a href="https://github.com/is-an" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </p>
-    </div>
-
+    <nav class="footer-section" aria-labelledby="footerInfoTitle">
+      <h2 class="v2-footer-heading" id="footerInfoTitle" data-i18n="footer.infoTitle">이용 안내</h2>
+      <ul class="v2-footer-links">
+        <li><a href="/faq/" data-i18n="footer.faq">FAQ</a></li>
+        <li><a href="/privacy/" data-i18n="footer.privacy">개인정보처리방침</a></li>
+        <li><a href="mailto:isablog@naver.com?subject=%5Bis-an%5D%20%EC%9D%98%EA%B2%AC%20%EB%B3%B4%EB%82%B4%EA%B8%B0" data-i18n="footer.contact">의견 보내기</a></li>
+      </ul>
+    </nav>
   </div>
 
-  <div class="container footer-bottom v2-footer-bottom">
-    <p data-i18n="footer_privacy_note">모든 계산은 브라우저에서 처리되어 입력값이 서버로 전송되지 않습니다.</p>
+  <div class="footer-bottom v2-footer-bottom">
+    <p class="v2-footer-copy">&copy; 2026 is-an Labs.</p>
+    <a href="/privacy/" data-i18n="footer_privacy_note">개인정보 및 광고·쿠키 안내</a>
   </div>
 </footer>

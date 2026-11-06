@@ -4,15 +4,15 @@
    ▸ 로드 순서: style.css → v2.css → game.css
    ========================================================= */
 
-.v2-page .v2-game-eyebrow { color: var(--v2-play); }
-.v2-page .v2-game-side-dot { background: var(--v2-play); }
-.v2-page .v2-game-more a { color: var(--v2-play); }
+.v2-page .v2-game-eyebrow { color: var(--v2-accent); }
+.v2-page .v2-game-side-dot { background: var(--v2-accent); }
+.v2-page .v2-game-more a { color: var(--v2-accent); }
 
 /* ---------- 게임 카드 ---------- */
 .v2-page .v2-game-card {
   background: var(--v2-surface);
   border: 1px solid var(--v2-border);
-  border-radius: 16px;
+  border-radius: var(--v2-radius-lg);
   padding: 18px;
 }
 

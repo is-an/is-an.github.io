@@ -5,46 +5,32 @@
    ▸ 시그니처 컬러: 노랑 (--v2-lotto*, v2.css 에 정의)
    ========================================================= */
 
-/* ---------- 히어로(노랑 배너) ---------- */
+/* ---------- 공통 페이지 헤더 ---------- */
 .v2-page .v2-lotto-hero {
-  background: var(--v2-lotto-bg);
-  border-bottom: 1px solid var(--v2-lotto-border);
+  background: var(--v2-bg);
 }
 .v2-page .v2-lotto-hero-inner {
   max-width: var(--v2-max);
   margin: 0 auto;
-  padding: 20px 24px 44px;
+  padding: 32px 24px 0;
 }
-.v2-page .v2-lotto-hero .v2-crumb { margin-bottom: 24px; }
-.v2-page .v2-lotto-hero .v2-eyebrow { color: var(--v2-lotto); }
 .v2-page .v2-lotto-title {
-  margin: 0 0 10px;
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: 700;
+  margin: 0 0 8px;
+  font-size: var(--v2-title-size);
+  font-weight: 600;
   line-height: 1.25;
   letter-spacing: -.03em;
 }
 .v2-page .v2-lotto-lede {
   margin: 0;
-  max-width: 560px;
+  max-width: 640px;
   font-size: 15px;
-  line-height: 1.7;
-  color: var(--v2-text-2);
+  line-height: 1.65;
+  color: var(--v2-muted);
   text-wrap: pretty;
 }
 
-/* 히어로에 살짝 겹쳐 올라오는 본문 */
-.v2-page .v2-lotto-layout { margin-top: -24px; }
-
-/* ---------- 생성기 카드 ---------- */
-.v2-page .v2-lotto-card { box-shadow: 0 6px 24px rgba(30, 26, 10, .06); }
-.v2-page .v2-lotto-card .v2-btn-primary {
-  background: var(--v2-lotto-deep);
-  color: #fff;
-}
 .v2-page .v2-lotto-card .v2-btn-primary:hover { opacity: .92; }
-/* 다크 모드: 밝은 노랑 버튼에는 어두운 글자 */
-[data-theme="dark"] .v2-page .v2-lotto-card .v2-btn-primary { color: #241f0c; }
 
 /* 번호 고정 셀렉트 */
 .v2-page .v2-lotto-fixed-label {
@@ -193,7 +179,7 @@
 
 /* ---------- 반응형 ---------- */
 @media (max-width: 640px) {
-  .v2-page .v2-lotto-hero-inner { padding: 16px 16px 38px; }
+  .v2-page .v2-lotto-hero-inner { padding: 24px 16px 0; }
   .v2-page .v2-lotto-fixed { grid-template-columns: 1fr 1fr; }
   .v2-page .lottery-ball { width: 46px; height: 46px; font-size: 16px; }
 }

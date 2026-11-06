@@ -18,12 +18,17 @@ class Page(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.references, self.scripts, self.ids, self.duplicate_ids = [], [], set(), []
         self.h1_count = 0
+        self.stylesheets, self.body_classes = [], set()
         self.has_title = self.redirect = False
         self.script = None
         self.feed(source)
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if tag == "body":
+            self.body_classes = set(attrs.get("class", "").split())
+        if tag == "link" and "stylesheet" in attrs.get("rel", "").split():
+            self.stylesheets.append(attrs.get("href", ""))
         if attrs.get("id"):
             if attrs["id"] in self.ids:
                 self.duplicate_ids.append(attrs["id"])
@@ -116,6 +121,11 @@ def check_site():
         if not name.startswith("components/") and not page.redirect:
             if not page.has_title or page.h1_count != 1:
                 errors.append(f"{name}: expected title and one h1 (found {page.h1_count} h1)")
+            styles = [urlsplit(href).path.rsplit("/", 1)[-1] for href in page.stylesheets]
+            if "v2-page" not in page.body_classes or not {"site-header", "site-footer"}.issubset(page.ids):
+                errors.append(f"{name}: missing shared v2 page frame")
+            if not {"style.css", "v2.css"}.issubset(styles) or styles.index("style.css") > styles.index("v2.css"):
+                errors.append(f"{name}: expected style.css before v2.css")
         for line, kind, source in page.scripts:
             if kind == "application/ld+json":
                 try:
