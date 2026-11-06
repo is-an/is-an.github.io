@@ -69,6 +69,7 @@ coverage/
 out/
 
 .test
+__pycache__/
 
 # Local-only manual test fixtures (raw camera files for shutter-count/EXIF)
 test/

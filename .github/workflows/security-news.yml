@@ -1,0 +1,101 @@
+name: Daily security bulletin
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 09:00 Asia/Seoul (execution can be delayed by GitHub)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  bulletin:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Test selection and rendering inputs
+        run: python -m unittest discover -s scripts -p 'test_security_news.py'
+      - name: Collect one new bulletin
+        id: bulletin
+        shell: bash
+        run: |
+          python scripts/security-news.py
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          from datetime import datetime, timedelta, timezone
+          import json
+          from pathlib import Path
+          path = Path('assets/data/security-news.json')
+          posts = json.loads(path.read_text()) if path.exists() else []
+          today = datetime.now(timezone(timedelta(hours=9))).date().isoformat()
+          current = next((p for p in posts if p['date'] == today), None)
+          print('slug=' + (current['slug'] if current else ''))
+          PY
+      - name: Export five JPEG cards
+        if: steps.bulletin.outputs.slug != ''
+        env:
+          SLUG: ${{ steps.bulletin.outputs.slug }}
+        run: |
+          if ! fc-list :lang=ko | grep -q .; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+          fi
+          node scripts/render-security-cards.cjs "guide/posts/$SLUG"
+      - name: Validate site
+        if: steps.bulletin.outputs.slug != ''
+        run: npm test
+      - name: Save generated content
+        if: steps.bulletin.outputs.slug != ''
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add guide/index.html guide/posts/ assets/data/security-news.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'content: publish daily security bulletin'
+            git push
+          fi
+      - uses: actions/configure-pages@v5
+        if: steps.bulletin.outputs.slug != ''
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.bulletin.outputs.slug != ''
+        with:
+          path: '.'
+      - uses: actions/deploy-pages@v5
+        if: steps.bulletin.outputs.slug != ''
+        id: deployment
+      - name: Publish connected social accounts
+        if: steps.bulletin.outputs.slug != ''
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+          INSTAGRAM_LOGIN_MODE: ${{ vars.INSTAGRAM_LOGIN_MODE }}
+          META_GRAPH_VERSION: ${{ vars.META_GRAPH_VERSION }}
+          INSTAGRAM_USERNAME: tech.alert.kr
+          THREADS_USERNAME: tech.alert.kr
+        run: python scripts/publish-security-social.py
+      - name: Persist social receipts even after a publish timeout
+        if: always() && steps.bulletin.outputs.slug != ''
+        run: |
+          if [ -f assets/data/security-social.json ]; then
+            git add assets/data/security-social.json
+            if ! git diff --cached --quiet; then
+              git commit -m 'chore: record social publishing receipt'
+              git push
+            fi
+          fi
+
